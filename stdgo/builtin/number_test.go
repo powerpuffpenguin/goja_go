@@ -3,6 +3,7 @@ package builtin_test
 import (
 	"fmt"
 	"math"
+	"reflect"
 	"testing"
 	"time"
 
@@ -39,7 +40,7 @@ func TestNumber(t *testing.T) {
 	r.Set(`printType`, printType)
 
 	r.Set(`make`, func() interface{} {
-		return builtin.Wrap([]int64{math.MaxInt64, 1, 2})
+		return builtin.Wrap(reflect.ValueOf([]int64{math.MaxInt64, 1, 2}))
 	})
 	r.Set(`makeSecond`, func() time.Duration {
 		return time.Second
@@ -48,11 +49,11 @@ func TestNumber(t *testing.T) {
 		return v
 	})
 	_, e := r.RunString(`
-const builtin = require("stdgo/builtin")
-var x=make()
-x=builtin.append(x,1,Int64(makeSecond()))
-print(builtin.len(x),builtin.cap(x))
-printType(x)
+// const builtin = require("stdgo/builtin")
+// var x=make()
+// x=builtin.append(x,1,Int64(makeSecond()))
+// print(builtin.len(x),builtin.cap(x))
+// printType(x)
 `)
 	if e != nil {
 		t.Fatal(e)

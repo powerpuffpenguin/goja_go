@@ -1,6 +1,9 @@
 package builtin
 
-import "reflect"
+import (
+	"reflect"
+	"unsafe"
+)
 
 type Float32 float32
 type Float64 float64
@@ -31,15 +34,35 @@ type Uint64Slice []uint64
 type StringSlice []string
 
 func (f *factory) registerNumber() {
+	f.Set(`Int64`, f.Int64)
+}
+func (f *factory) Int64(v Int64) Int64 {
+	return v
+}
 
+type emptyInterface struct {
+	typ  *emptyInterface
+	word unsafe.Pointer
 }
-func WrapValueOf(i interface{}) reflect.Value {
-	return reflect.ValueOf(Wrap(i))
+
+func wrapArray(value reflect.Value) reflect.Value {
+	typ := reflect.SliceOf(value.Type().Elem())
+	slice := reflect.New(typ)
+
+	p0 := (*reflect.SliceHeader)(unsafe.Pointer(slice.Pointer()))
+	p0.Len = value.Len()
+	p0.Cap = p0.Len
+
+	p1 := (*emptyInterface)(unsafe.Pointer(&value))
+	p0.Data = uintptr(p1.word)
+
+	return reflect.Indirect(slice)
 }
-func UnwrapValueOf(i interface{}) reflect.Value {
-	return reflect.ValueOf(Unwrap(i))
-}
-func Wrap(i interface{}) interface{} {
+func Wrap(value reflect.Value) interface{} {
+	if value.Kind() == reflect.Array {
+		return wrapArray(value).Interface()
+	}
+	i := value.Interface()
 	switch i := i.(type) {
 	case int:
 		return Int(i)
@@ -94,7 +117,10 @@ func Wrap(i interface{}) interface{} {
 	}
 	return i
 }
-func Unwrap(i interface{}) interface{} {
+func Unwrap(i interface{}) reflect.Value {
+	return reflect.ValueOf(unwrap(i))
+}
+func unwrap(i interface{}) interface{} {
 	switch i := i.(type) {
 	case Int:
 		return int(i)
