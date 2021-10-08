@@ -3,7 +3,7 @@ package utils
 import (
 	"errors"
 
-	"github.com/dop251/goja"
+	"github.com/powerpuffpenguin/goja"
 )
 
 type Definer struct {

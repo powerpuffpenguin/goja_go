@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/dop251/goja"
-	"github.com/dop251/goja_nodejs/require"
+	"github.com/powerpuffpenguin/goja"
+	"github.com/powerpuffpenguin/goja/require"
 	"github.com/powerpuffpenguin/goja_go/stdgo/builtin"
 )
 

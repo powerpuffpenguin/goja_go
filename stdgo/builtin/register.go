@@ -4,11 +4,12 @@ import (
 	"errors"
 	"reflect"
 
-	"github.com/dop251/goja"
+	"github.com/powerpuffpenguin/goja"
 	"github.com/powerpuffpenguin/goja_go/core/utils"
 )
 
 func (f *factory) register() {
+	f.Accessor(`native`, f.getNative, nil)
 	f.Set(`append`, f.append)
 	f.Set(`cap`, f.cap)
 	f.Set(`len`, f.len)
@@ -32,6 +33,9 @@ func (f *factory) register() {
 	f.Set(`selectRecv`, f.selectRecv)
 	f.Set(`selectSend`, f.selectSend)
 	f.Set(`select`, f._select)
+}
+func (f *factory) getNative(call goja.FunctionCall) goja.Value {
+	return f.runtime.ToValue(f)
 }
 func (f *factory) append(slice interface{}, elems ...interface{}) interface{} {
 	defer utils.Recover(f.runtime)

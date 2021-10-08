@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/dop251/goja"
+	"github.com/powerpuffpenguin/goja"
 )
 
 func Recover(r *goja.Runtime) {
