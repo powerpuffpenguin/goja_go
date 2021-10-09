@@ -38,7 +38,7 @@
 
 /// <reference path="io.d.ts" />
 /// <reference path="io/fs.d.ts" />
-    // / <reference path="io/ioutil.d.ts" />
+/// <reference path="io/ioutil.d.ts" />
 
     // / <reference path="net.d.ts" />
     // / <reference path="net/url.d.ts" />

@@ -6,6 +6,7 @@ import (
 
 	io "github.com/powerpuffpenguin/goja_go/stdgo/io"
 	io_fs "github.com/powerpuffpenguin/goja_go/stdgo/io/fs"
+	io_ioutil "github.com/powerpuffpenguin/goja_go/stdgo/io/ioutil"
 
 	os "github.com/powerpuffpenguin/goja_go/stdgo/os"
 
@@ -15,6 +16,7 @@ import (
 var modules = []module{
 	{io.ModuleID, io.Require},
 	{io_fs.ModuleID, io_fs.Require},
+	{io_ioutil.ModuleID, io_ioutil.Require},
 
 	{os.ModuleID, os.Require},
 
