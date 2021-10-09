@@ -1,0 +1,350 @@
+package builtin{{with $ctx :=  .}}
+
+import (
+	"errors"
+	"fmt"
+	"math"
+	"sort"
+	"strconv"
+	"strings"
+
+	"github.com/powerpuffpenguin/goja"
+)
+{{range .}}
+type {{.Name}} {{.Type}}
+
+func (v {{.Name}}) String() string {
+	return fmt.Sprint({{.Type}}(v))
+}{{if .Integer}}
+func (v {{.Name}}) ToNumber() goja.Value {
+	return goja.Int(int64(v))
+}{{else}}
+func (v {{.Name}}) ToNumber() goja.Value {
+	return goja.Float(float64(v))
+}{{end}}{{with $parent :=  .}}{{range $item := $ctx}}
+func (v {{$parent.Name}}) To{{$item.Name}}() {{$item.Type}} {
+	return {{$item.Type}}(v)
+}{{end}}{{end}}{{if not .Uint}}
+func (v {{.Name}}) ABS() {{.Type}} {
+	result := {{.Type}}(v)
+	if result < 0 {
+		return -result
+	}
+	return result
+}
+func (v {{.Name}}) Negate() {{.Type}} {
+	return {{.Type}}(-v)
+}{{end}}
+func (v {{.Name}}) Add(vals ...{{.Type}}) {{.Type}} {
+	result := {{.Type}}(v)
+	for _, val := range vals {
+		result += val
+	}
+	return result
+}
+func (v {{.Name}}) Sub(vals ...{{.Type}}) {{.Type}} {
+	result := {{.Type}}(v)
+	for _, val := range vals {
+		result -= val
+	}
+	return result
+}
+func (v {{.Name}}) Mul(vals ...{{.Type}}) {{.Type}} {
+	result := {{.Type}}(v)
+	for _, val := range vals {
+		result *= val
+	}
+	return result
+}
+func (v {{.Name}}) Div(vals ...{{.Type}}) ({{.Type}}, error) {
+	result := {{.Type}}(v)
+	if result == 0 {
+		return 0, nil
+	}
+	for _, val := range vals {
+		if val == 0 {
+			return 0, errors.New("divide by zero")
+		}
+		result /= val
+	}
+	return result, nil
+}{{if .Integer}}
+func (v {{.Name}}) Mod(vals ...{{.Type}}) ({{.Type}}, error) {
+	result := {{.Type}}(v)
+	if result == 0 {
+		return 0, nil
+	}
+	for _, val := range vals {
+		if val == 0 {
+			return 0, errors.New("divide by zero")
+		}
+		result %= val
+		if result == 0 {
+			return 0, nil
+		}
+	}
+	return result, nil
+}
+func (v {{.Name}}) And(vals ...{{.Type}}) {{.Type}} {
+	result := {{.Type}}(v)
+	for _, val := range vals {
+		result &= val
+	}
+	return result
+}
+func (v {{.Name}}) AndNot(vals ...{{.Type}}) {{.Type}} {
+	result := {{.Type}}(v)
+	for _, val := range vals {
+		result &= (^val)
+	}
+	return result
+}
+func (v {{.Name}}) Not() {{.Type}} {
+	return ^{{.Type}}(v)
+}
+func (v {{.Name}}) Or(vals ...{{.Type}}) {{.Type}} {
+	result := {{.Type}}(v)
+	for _, val := range vals {
+		result |= val
+	}
+	return result
+}
+func (v {{.Name}}) Xor(vals ...{{.Type}}) {{.Type}} {
+	result := {{.Type}}(v)
+	for _, val := range vals {
+		result ^= val
+	}
+	return result
+}
+func (v {{.Name}}) ShiftLeft(vals ...int) {{.Type}} {
+	result := {{.Type}}(v)
+	for _, val := range vals {
+		result <<= val
+	}
+	return result
+}
+func (v {{.Name}}) ShiftRight(vals ...int) {{.Type}} {
+	result := {{.Type}}(v)
+	for _, val := range vals {
+		result >>= val
+	}
+	return result
+}{{else}}
+func (v {{.Name}}) Sqrt() {{.Type}} {
+	result := math.Sqrt(float64(v))
+	return {{ typeconv2 "float64" .Type "result" }}
+}{{end}}
+func (v {{.Name}}) Compare(val {{.Type}}) goja.Value {
+	current := {{.Type}}(v)
+	if current == val {
+		return goja.Int(0)
+	} else if current < val {
+		return goja.Int(-1)
+	}
+	return goja.Int(1)
+}
+func (v {{.Name}}) Max(vals ...{{.Type}}) {{.Type}} {
+	result := {{.Type}}(v)
+	for _, val := range vals {
+		if val > result {
+			result = val
+		}
+	}
+	return result
+}
+func (v {{.Name}}) Min(vals ...{{.Type}}) {{.Type}} {
+	result := {{.Type}}(v)
+	for _, val := range vals {
+		if val < result {
+			result = val
+		}
+	}
+	return result
+}
+func (f *factory) is{{.Name}}(call goja.FunctionCall) goja.Value {
+	_, result := call.Argument(0).Export().({{.Name}})
+	return goja.Boolean(result)
+}
+func (f *factory) {{.Name}}(call goja.FunctionCall) goja.Value {
+	var (
+		r = f.runtime
+		result {{.Type}}
+		args   = call.Arguments
+		count  = len(call.Arguments)
+	)
+	if count > 0 {
+		if s, ok := args[0].Export().(string); ok {
+{{if .Integer}}			var base = 10
+			if count > 1 {
+				e := r.ExportTo(args[1], &base)
+				if e != nil {
+					panic(r.NewGoError(e))
+				}
+			}
+			val, e := {{if .Uint}}strconv.ParseUint{{else}}strconv.ParseInt{{end}}(s, base, {{.BitSize}})
+			if e !=nil {
+				panic(r.NewGoError(e))
+			}{{if .Uint}}
+			result = {{ typeconv2 "uint64" .Type "val"}}{{else}}
+			result = {{ typeconv2 "int64" .Type "val"}}{{end}}{{else}}			val, e := strconv.ParseFloat(s, {{.BitSize}})
+			if e !=nil {
+				panic(r.NewGoError(e))
+			}
+			result = {{ typeconv2 "float64" .Type "val"}}{{end}}
+		} else {
+			e := r.ExportTo(args[0], &result)
+			if e != nil {
+				panic(r.NewGoError(e))
+			}
+		}
+	}
+	return r.ToValue({{.Name}}(result))
+}
+{{end}}{{range .}}
+type {{.Name}}Slice []{{.Type}}
+
+func New{{.Name}}Slice(val []{{.Type}}) {{.Name}}Slice {
+	return {{.Name}}Slice(val)
+}
+func (v {{.Name}}Slice) String() string {
+	return fmt.Sprint([]{{.Type}}(v))
+}
+func (v {{.Name}}Slice) Len() int {
+	return len(v)
+}
+func (v {{.Name}}Slice) Swap(i, j int) {
+	v[i], v[j] = v[j], v[i]
+}
+func (v {{.Name}}Slice) Less(i, j int) bool {
+	return v[i] < v[j]
+}
+func (v {{.Name}}Slice) Cap() int {
+	return cap(v)
+}
+func (v {{.Name}}Slice) Copy(src []{{.Type}}) int {
+	return copy(v, src)
+}
+func (v {{.Name}}Slice) Slice(start int) []{{.Type}} {
+	count := len(v)
+	if count == 0 {
+		return v[:]
+	}
+	if start < 0 {
+		start = 0
+	}
+	return v[start:]
+}
+func (v {{.Name}}Slice) Slice2(start, end int) []{{.Type}} {
+	count := len(v)
+	if count == 0 {
+		return v[:]
+	}
+	if start < 0 {
+		start = 0
+	} else if start >= count {
+		return v[count:]
+	} else if end < start {
+		return v[start:start]
+	}
+	return v[start:end]
+}
+func (v {{.Name}}Slice) Append(data ...{{.Type}}) []{{.Type}} {
+	return append(v, data...)
+}
+func (v {{.Name}}Slice) Get(index int) ({{.Type}}, error) {
+	if index < 0 || index >= len(v) {
+		return 0, fmt.Errorf("slice bounds out of range get(%d)", index)
+	}
+	return {{.Type}}(v[index]), nil
+}
+func (v {{.Name}}Slice) Set(index int, val {{.Type}}) error {
+	if index < 0 || index >= len(v) {
+		return fmt.Errorf("slice bounds out of range get(%d)", index)
+	}
+	v[index] = val
+	return nil
+}
+func (v {{.Name}}Slice) Join(sep string) string {
+	var (
+		result string
+		count  = len(v)
+	)
+	if count > 0 {
+		strs := make([]string, count)
+		for i, val := range v {
+			strs[i] = fmt.Sprint(val)
+		}
+		result = strings.Join(strs, sep)
+	}
+	return result
+}
+func (v {{.Name}}Slice) Asc() {
+	sort.Sort(v)
+}
+func (v {{.Name}}Slice) Desc() {
+	sort.Sort(sort{{.Name}}Slice(v))
+}
+
+type sort{{.Name}}Slice []{{.Type}}
+
+func (a sort{{.Name}}Slice) Len() int           { return len(a) }
+func (a sort{{.Name}}Slice) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a sort{{.Name}}Slice) Less(i, j int) bool { return a[i] > a[j] }
+
+func (f *factory) is{{.Name}}Slice(call goja.FunctionCall) goja.Value {
+	_, result := call.Argument(0).Export().({{.Name}}Slice)
+	return goja.Boolean(result)
+}
+func (f *factory) {{.Name}}Slice(call goja.FunctionCall) goja.Value {
+	var (
+		r = f.runtime
+		result []{{.Type}}
+		args   = call.Arguments
+		count  = len(call.Arguments)
+	)
+	if count > 0 {
+		var l int
+		e := r.ExportTo(args[0], &l)
+		if e != nil {
+			panic(r.NewGoError(e))
+		} else if l < 0 {
+			l = 0
+		}
+		if count > 1 {
+			var c int
+			e := r.ExportTo(args[1], &c)
+			if e != nil {
+				panic(r.NewGoError(e))
+			} else if c < l {
+				c = l
+			}
+			result = make([]{{.Type}}, l, c)
+		} else {
+			result = make([]{{.Type}}, l)
+		}
+	}
+	return r.ToValue({{.Name}}Slice(result))
+}
+{{end}}
+{{range .}}{{if .Max}}func (f *factory) getMax{{.Name}}(call goja.FunctionCall) goja.Value {
+	return f.runtime.ToValue({{.Name}}(math.Max{{.Name}}))
+}
+{{end}}{{end}}
+{{range .}}{{if .Min}}func (f *factory) getMin{{.Name}}(call goja.FunctionCall) goja.Value {
+	return f.runtime.ToValue({{.Name}}(math.Min{{.Name}}))
+}
+{{end}}{{end}}
+func (f *factory) getIntSize(call goja.FunctionCall) goja.Value {
+	return goja.Int(strconv.IntSize)
+}
+func (f *factory) registerNumber() {
+{{range .}}	f.Set(`{{.Name}}`, f.{{.Name}})
+{{end}}{{range .}}{{if .Max}}	f.Accessor(`Max{{.Name}}`, f.getMax{{.Name}}, nil)
+{{end}}{{end}}{{range .}}{{if .Min}}	f.Accessor(`Min{{.Name}}`, f.getMin{{.Name}}, nil)
+{{end}}{{end}}	f.Accessor(`IntSize`, f.getIntSize, nil){{range .}}
+	f.Set(`{{.Name}}Slice`, f.{{.Name}}Slice){{end}}
+{{range .}}
+	f.Set(`is{{.Name}}`, f.is{{.Name}})
+	f.Set(`is{{.Name}}Slice`, f.is{{.Name}}Slice){{end}}
+}
+{{end}}

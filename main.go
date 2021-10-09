@@ -8,6 +8,8 @@ import (
 	"github.com/powerpuffpenguin/goja"
 	"github.com/powerpuffpenguin/goja/loop"
 	"github.com/powerpuffpenguin/goja/require"
+	core "github.com/powerpuffpenguin/goja_go/core"
+	"github.com/powerpuffpenguin/goja_go/core/console"
 	"github.com/powerpuffpenguin/goja_go/stdgo"
 	"github.com/powerpuffpenguin/goja_go/stdgo/builtin"
 )
@@ -45,15 +47,17 @@ func main() {
 		// enable require
 		registry := require.NewRegistry(
 			require.WithGlobalFolders(`node_modules`),
-			require.WithLoader(require.DefaultSourceLoader),
+			require.WithLoader(core.Loader),
 		)
 		registry.Enable(runtime)
+		// enable console
+		console.Enable(runtime)
 
 		// enable stdgo
 		stdgo.Enable(runtime)
 		stdgo.RegisterNativeModuleToRegistry(registry)
 
-		source, e := require.DefaultSourceLoader(filename)
+		source, e := core.Load(filename)
 		if e != nil {
 			log.Fatalln(e)
 		}

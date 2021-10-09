@@ -24,8 +24,22 @@ func (f *factory) registerBox() {
 	f.Set(`print`, print)
 	f.Set(`printType`, printType)
 	f.Set(`async`, f.async)
+	f.Set(`error`, f.error)
 }
-
+func (f *factory) error(call goja.FunctionCall) goja.Value {
+	runtime := f.runtime
+	callable, ok := goja.AssertFunction(call.Argument(0))
+	if !ok {
+		panic(runtime.NewTypeError(`arg0 not callable`))
+	}
+	f.style = callErr
+	defer f.recover()
+	val, e := callable(goja.Undefined())
+	if e != nil {
+		panic(runtime.NewGoError(e))
+	}
+	return val
+}
 func (f *factory) async(call goja.FunctionCall) goja.Value {
 	runtime := f.runtime
 	callable, ok := goja.AssertFunction(call.Argument(0))
@@ -254,6 +268,18 @@ func (c *caller) Before(runtime *goja.Runtime, call *goja.FunctionCall) (err err
 }
 
 func (c *caller) Call(runtime *goja.Runtime, callSlice bool, callable reflect.Value, in []reflect.Value) (out []reflect.Value, err error) {
+	defer func() {
+		if e := recover(); e != nil {
+			if v, ok := e.(goja.Value); ok {
+				panic(v)
+			} else if err, ok := e.(error); ok {
+				panic(runtime.NewGoError(err))
+			} else {
+				panic(runtime.NewGoError(errors.New(fmt.Sprint(e))))
+			}
+		}
+	}()
+
 	if c.scheduler == nil {
 		if callSlice {
 			out = callable.CallSlice(in)
@@ -352,6 +378,7 @@ type asyncImpl struct {
 	in        []reflect.Value
 
 	result []reflect.Value
+	err    goja.Value
 }
 
 func newAsyncImpl(caller *caller,
@@ -369,15 +396,33 @@ func newAsyncImpl(caller *caller,
 	}
 }
 func (a *asyncImpl) Serve() {
+	a.serve()
+	a.runtime.Loop().Result(a)
+}
+func (a *asyncImpl) serve() {
+	defer func() {
+		if e := recover(); e != nil {
+			if v, ok := e.(goja.Value); ok {
+				a.err = v
+			} else if err, ok := e.(error); ok {
+				a.err = a.runtime.NewGoError(err)
+			} else {
+				a.err = a.runtime.NewGoError(errors.New(fmt.Sprint(e)))
+			}
+		}
+	}()
 	if a.callSlice {
 		a.result = a.value.CallSlice(a.in)
 	} else {
 		a.result = a.value.Call(a.in)
 	}
-	a.runtime.Loop().Result(a)
 }
 func (a *asyncImpl) OnResult(closed bool) (completed bool) {
 	completed = true
+	if a.err != nil {
+		a.promise.Reject(a.err)
+		return
+	}
 	var (
 		runtime = a.runtime
 		caller  = a.caller

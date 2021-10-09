@@ -33,6 +33,7 @@ func (f *factory) register() {
 	f.Set(`selectRecv`, f.selectRecv)
 	f.Set(`selectSend`, f.selectSend)
 	f.Set(`select`, f._select)
+	f.Set(`close`, f.close)
 }
 func (f *factory) getNative(call goja.FunctionCall) goja.Value {
 	return f.runtime.ToValue(f)
@@ -290,9 +291,14 @@ func (f *factory) selectSend(call goja.FunctionCall) goja.Value {
 	})
 }
 func (f *factory) _select(cases ...reflect.SelectCase) (chosen int, recv interface{}, recvOK bool) {
+	defer utils.Recover(f.runtime)
 	chosen, v, recvOK := reflect.Select(cases)
 	if recvOK {
 		recv = Wrap(v)
 	}
 	return
+}
+func (f *factory) close(i interface{}) {
+	defer utils.Recover(f.runtime)
+	reflect.ValueOf(i).Close()
 }

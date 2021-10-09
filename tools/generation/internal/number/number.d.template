@@ -1,0 +1,125 @@
+declare module "stdgo/builtin" {
+    {{with $ctx :=  .}}interface Native {
+        readonly __Native: Native
+    }
+    interface Type {
+        readonly __Type: Type
+    }
+    interface Uintptr extends Native {
+        readonly __Uintptr: Uintptr
+    }
+    interface Number extends Native {
+        readonly __Number: Number
+    }
+    type NumberLike = number | string | null | undefined | Number
+    interface Slice<T> extends Native {
+        readonly __Slice: Slice<T>
+    }
+    interface Map<K, V> extends Native {
+        readonly __Map: Map<K, V>
+    }
+
+    interface ReadChannel<T> extends Native {
+        readonly __ReadChannel: ReadChannel<T>
+    }
+    interface WriteChannel<T> extends Native {
+        readonly __WriteChannel: WriteChannel<T>
+    }
+    interface Channel<T> extends ReadChannel<T>, WriteChannel<T> {}
+    interface SelectCase extends Native {
+        readonly __SelectCase: SelectCase
+    }
+
+    function append<T>(slice: Slice<T>, ...elems: Array<T>): Slice<T>
+    function cap<T>(slice: Slice<T>): Int
+    function len<T>(slice: Slice<T>): Int
+    function copy<T>(dst: Slice<T>, src: Slice<T>): Int
+    function getIndex<T>(slice: Slice<T>, index: NumberLike): T
+    function setIndex<T>(slice: Slice<T>, index: NumberLike, x: T): void
+    function slice<T>(slice: Slice<T>, i?: NumberLike, j?: NumberLike, k?: NumberLike): Slice<T>
+    function getKey<K, V>(m: Map<K, V>, key: K): [V, boolean]
+    function setKey<K, V>(m: Map<K, V>, key: K, elem: V): void
+    function deleteKey<K, V>(m: Map<K, V>, key: K): void
+    function typeOf(native: Native): Type
+    function newType(t: Type): Native
+    function makeSlice(t: Type, len?: Int | NumberLike, cap?: Int | NumberLike): Slice
+    function makeMap(t: Type): Map
+    function makeChan(t: Type, buffer?: Int | NumberLike): Channel
+    function recv<T>(ch: ReadChannel<T>): [T, boolean]
+    function tryRecv<T>(ch: ReadChannel<T>): [T, boolean]
+    function send<T>(ch: WriteChannel<T>, x: T): void
+    function trySend<T>(ch: WriteChannel<T>, x: T): boolean
+    function selectDefault(): SelectCase
+    function selectRecv<T>(ch: ReadChannel<T>): SelectCase
+    function selectSend<T>(ch: WriteChannel<T>, send: T): SelectCase
+    /** return (chosen int, recv interface{}, recvOK bool)  */
+    function select(...cases: Array<SelectCase>): [Int, any, boolean]
+    function close(ch: WriteChannel): void
+
+    interface Error extends Native {
+        readonly Error: Error
+        Error(): string
+    }
+   
+    {{range.}}{{if .Max}}
+    const Max{{.Name}}: {{.Name}}{{end}}{{end}}{{range.}}{{if .Min}}
+    const Min{{.Name}}: {{.Name}}{{end}}{{end}}
+    const IntSize: number
+    {{range.}}
+    interface {{.Name}} extends Number {
+        readonly __{{.Name}}: {{.Name}}
+ 
+        String(): string
+        ToNumber(): number{{range $item := $ctx}}
+        To{{$item.Name}}(): {{$item.Name}}{{end}}{{if not .Uint}}
+        ABS(): {{.Name}}
+        Negate(): {{.Name}}{{end}}
+        Add(...value: Array<NumberLike>): {{.Name}}
+        Sub(...value: Array<NumberLike>): {{.Name}}
+        Mul(...value: Array<NumberLike>): {{.Name}}
+        Div(...value: Array<NumberLike>): {{.Name}}{{if .Integer}}
+        Mod(...value: Array<NumberLike>): {{.Name}}
+        And(...value: Array<NumberLike>): {{.Name}}
+        AndNot(...value: Array<NumberLike>): {{.Name}}
+        Not(): {{.Name}}
+        Or(...value: Array<NumberLike>): {{.Name}}
+        Xor(...value: Array<NumberLike>): {{.Name}}
+        ShiftLeft(...value: Array<NumberLike>): {{.Name}}
+        ShiftRight(...value: Array<NumberLike>): {{.Name}}{{else}}
+        Sqrt(): {{.Name}}{{end}}
+        Compare(val: NumberLike): number
+        Max(...value: Array<NumberLike>): {{.Name}}
+        Min(...value: Array<NumberLike>): {{.Name}}
+    }
+    function {{.Name}}(val: NumberLike): {{.Name}}
+    function {{.Name}}(val: string{{if .Integer}}, base: number | string{{end}}): {{.Name}}
+    function is{{.Name}}(v: any): v is {{.Name}}
+    {{end}}{{range.}}
+    interface {{.Name}}Slice extends Slice<{{.Name}}> {
+        private readonly __{{.Name}}Slice: {{.Name}}Slice
+        private constructor()
+        String(): string
+        Len(): GoInt
+        Swap(i: NumberLike, j: NumberLike)
+        Less(i: NumberLike, j: NumberLike): boolean
+        Cap(): GoInt
+        Copy(src: Go{{.Name}}Array): GoInt
+        Slice(start: NumberLike): Go{{.Name}}Array
+        SliceEnd(start: NumberLike, end: NumberLike): Go{{.Name}}Array
+        Append(...data: Array<NumberLike>): Go{{.Name}}Array
+        Get(index: NumberLike): Go{{.Name}}
+        Set(index: NumberLike, val: NumberLike)
+        Join(sep: string): string
+        Asc()
+        Desc()
+    }
+    function {{.Name}}Slice(): {{.Name}}Slice
+    function {{.Name}}Slice(len: NumberLike): {{.Name}}Slice
+    function {{.Name}}Slice(len: NumberLike, cap: NumberLike): {{.Name}}Slice
+    function is{{.Name}}Slice(v: any): v is {{.Name}}Slice{{end}}{{end}}
+
+    type Rune = Int32
+    type Runes = Int32Slice
+    type Byte = Uint8
+    type Bytes = Uint8Slice
+}
