@@ -4,6 +4,8 @@ import (
 	"github.com/powerpuffpenguin/goja"
 	"github.com/powerpuffpenguin/goja/require"
 
+	errors "github.com/powerpuffpenguin/goja_go/stdgo/errors"
+
 	io "github.com/powerpuffpenguin/goja_go/stdgo/io"
 	io_fs "github.com/powerpuffpenguin/goja_go/stdgo/io/fs"
 	io_ioutil "github.com/powerpuffpenguin/goja_go/stdgo/io/ioutil"
@@ -17,6 +19,8 @@ import (
 )
 
 var modules = []module{
+	{errors.ModuleID, errors.Require},
+
 	{io.ModuleID, io.Require},
 	{io_fs.ModuleID, io_fs.Require},
 	{io_ioutil.ModuleID, io_ioutil.Require},

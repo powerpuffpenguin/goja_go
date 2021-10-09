@@ -10,6 +10,5 @@ export function TestSlice() {
 
         assert.equal(b.Len(), 5)
         assert.equal(b.Cap(), 10)
-
     })
 }

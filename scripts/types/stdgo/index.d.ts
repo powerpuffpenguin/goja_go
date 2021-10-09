@@ -25,7 +25,7 @@
     // / <reference path="crypto/hmac.d.ts" />
     // / <reference path="crypto/md5.d.ts" />
 
-    // / <reference path="errors.d.ts" />
+/// <reference path="errors.d.ts" />
 
     // / <reference path="fmt.d.ts" />
 
