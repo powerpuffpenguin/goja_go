@@ -280,10 +280,10 @@ func (f *factory) getModePerm(call goja.FunctionCall) goja.Value {
 }
 
 func (f *factory) getPathSeparator(call goja.FunctionCall) goja.Value {
-	return f.runtime.ToValue(os.PathSeparator)
+	return f.runtime.ToValue(builtin.Int32(os.PathSeparator))
 }
 func (f *factory) getPathListSeparator(call goja.FunctionCall) goja.Value {
-	return f.runtime.ToValue(os.PathListSeparator)
+	return f.runtime.ToValue(builtin.Int32(os.PathListSeparator))
 }
 func (f *factory) getSEEK_SET(call goja.FunctionCall) goja.Value {
 	return f.runtime.ToValue(builtin.Int(io.SeekStart))

@@ -10,6 +10,9 @@ import (
 
 	os "github.com/powerpuffpenguin/goja_go/stdgo/os"
 
+	path "github.com/powerpuffpenguin/goja_go/stdgo/path"
+	path_filepath "github.com/powerpuffpenguin/goja_go/stdgo/path/filepath"
+
 	time "github.com/powerpuffpenguin/goja_go/stdgo/time"
 )
 
@@ -19,6 +22,9 @@ var modules = []module{
 	{io_ioutil.ModuleID, io_ioutil.Require},
 
 	{os.ModuleID, os.Require},
+
+	{path.ModuleID, path.Require},
+	{path_filepath.ModuleID, path_filepath.Require},
 
 	{time.ModuleID, time.Require},
 }

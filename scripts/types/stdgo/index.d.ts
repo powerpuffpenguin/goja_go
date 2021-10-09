@@ -45,8 +45,8 @@
 
 /// <reference path="os.d.ts" />
 
-    // / <reference path="path.d.ts" />
-    // / <reference path="path/filepath.d.ts" />
+/// <reference path="path.d.ts" />
+/// <reference path="path/filepath.d.ts" />
 
 /// <reference path="syscall.d.ts" />
 
