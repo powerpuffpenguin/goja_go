@@ -5,10 +5,14 @@ declare module "stdgo/time" {
         Uint64, Uint32, Uint16, Uint8, Uint,
         Number, NumberLike,
         Byte, Bytes, Rune, Runes,
+        Float32Slice, Float64Slice,
+        Int64Slice, Int32Slice, Int16Slice, Int8Slice, IntSlice,
+        Uint64Slice, Uint32Slice, Uint16Slice, Uint8Slice, UintSlice,
         Error,
-        Float64Slice,
-        ReadChannel,
-    } from "stdgo/builtin"
+        ReadChannel, WriteChannel, Channel,
+        Slice, Map,
+    } from "stdgo/builtin";
+
     const Layout = "01/02 03:04:05PM '06 -0700" // The reference time, in numerical order.
     const ANSIC = "Mon Jan _2 15:04:05 2006"
     const UnixDate = "Mon Jan _2 15:04:05 MST 2006"

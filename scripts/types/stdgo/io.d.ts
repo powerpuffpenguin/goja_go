@@ -5,10 +5,13 @@ declare module "stdgo/io" {
         Uint64, Uint32, Uint16, Uint8, Uint,
         Number, NumberLike,
         Byte, Bytes, Rune, Runes,
+        Float32Slice, Float64Slice,
+        Int64Slice, Int32Slice, Int16Slice, Int8Slice, IntSlice,
+        Uint64Slice, Uint32Slice, Uint16Slice, Uint8Slice, UintSlice,
         Error,
-        Float64Slice,
-        ReadChannel,
-    } from "stdgo/builtin"
+        ReadChannel, WriteChannel, Channel,
+        Slice, Map,
+    } from "stdgo/builtin";
 
     const SeekStart = 0 // seek relative to the origin of the file
     const SeekCurrent = 1 // seek relative to the current offset
@@ -57,7 +60,7 @@ declare module "stdgo/io" {
         CloseWithError(err: Error): Error
         Read(data: Bytes): Int
     }
-    class PipeWriterPointer extends Native {
+    interface PipeWriterPointer extends Native {
         readonly __PipeWriterPointer: PipeWriterPointer
 
         Close(): void

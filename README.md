@@ -56,7 +56,7 @@ The following js environment supports the go standard library:
 * ~~image~~
 * ~~index~~
 * io
-   * ~~fs~~
+   * fs
    * ~~ioutil~~
 * ~~log~~
 * ~~math~~
