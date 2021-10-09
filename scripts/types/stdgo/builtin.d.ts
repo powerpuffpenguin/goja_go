@@ -62,7 +62,7 @@ declare module "stdgo/builtin" {
     function close(ch: WriteChannel): void
 
     interface Error extends Native {
-        readonly Error: Error
+        readonly __Error: Error
         Error(): string
     }
 
@@ -528,8 +528,7 @@ declare module "stdgo/builtin" {
     function isFloat32(v: any): v is Float32
 
     interface IntSlice extends Slice<Int> {
-        private readonly __IntSlice: IntSlice
-        private constructor()
+        readonly __IntSlice: IntSlice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
@@ -550,8 +549,7 @@ declare module "stdgo/builtin" {
     function IntSlice(len: NumberLike, cap: NumberLike): IntSlice
     function isIntSlice(v: any): v is IntSlice
     interface Int64Slice extends Slice<Int64> {
-        private readonly __Int64Slice: Int64Slice
-        private constructor()
+        readonly __Int64Slice: Int64Slice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
@@ -572,8 +570,7 @@ declare module "stdgo/builtin" {
     function Int64Slice(len: NumberLike, cap: NumberLike): Int64Slice
     function isInt64Slice(v: any): v is Int64Slice
     interface Int32Slice extends Slice<Int32> {
-        private readonly __Int32Slice: Int32Slice
-        private constructor()
+        readonly __Int32Slice: Int32Slice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
@@ -594,8 +591,7 @@ declare module "stdgo/builtin" {
     function Int32Slice(len: NumberLike, cap: NumberLike): Int32Slice
     function isInt32Slice(v: any): v is Int32Slice
     interface Int16Slice extends Slice<Int16> {
-        private readonly __Int16Slice: Int16Slice
-        private constructor()
+        readonly __Int16Slice: Int16Slice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
@@ -616,8 +612,7 @@ declare module "stdgo/builtin" {
     function Int16Slice(len: NumberLike, cap: NumberLike): Int16Slice
     function isInt16Slice(v: any): v is Int16Slice
     interface Int8Slice extends Slice<Int8> {
-        private readonly __Int8Slice: Int8Slice
-        private constructor()
+        readonly __Int8Slice: Int8Slice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
@@ -638,8 +633,7 @@ declare module "stdgo/builtin" {
     function Int8Slice(len: NumberLike, cap: NumberLike): Int8Slice
     function isInt8Slice(v: any): v is Int8Slice
     interface UintSlice extends Slice<Uint> {
-        private readonly __UintSlice: UintSlice
-        private constructor()
+        readonly __UintSlice: UintSlice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
@@ -660,8 +654,7 @@ declare module "stdgo/builtin" {
     function UintSlice(len: NumberLike, cap: NumberLike): UintSlice
     function isUintSlice(v: any): v is UintSlice
     interface Uint64Slice extends Slice<Uint64> {
-        private readonly __Uint64Slice: Uint64Slice
-        private constructor()
+        readonly __Uint64Slice: Uint64Slice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
@@ -682,8 +675,7 @@ declare module "stdgo/builtin" {
     function Uint64Slice(len: NumberLike, cap: NumberLike): Uint64Slice
     function isUint64Slice(v: any): v is Uint64Slice
     interface Uint32Slice extends Slice<Uint32> {
-        private readonly __Uint32Slice: Uint32Slice
-        private constructor()
+        readonly __Uint32Slice: Uint32Slice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
@@ -704,8 +696,7 @@ declare module "stdgo/builtin" {
     function Uint32Slice(len: NumberLike, cap: NumberLike): Uint32Slice
     function isUint32Slice(v: any): v is Uint32Slice
     interface Uint16Slice extends Slice<Uint16> {
-        private readonly __Uint16Slice: Uint16Slice
-        private constructor()
+        readonly __Uint16Slice: Uint16Slice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
@@ -726,8 +717,7 @@ declare module "stdgo/builtin" {
     function Uint16Slice(len: NumberLike, cap: NumberLike): Uint16Slice
     function isUint16Slice(v: any): v is Uint16Slice
     interface Uint8Slice extends Slice<Uint8> {
-        private readonly __Uint8Slice: Uint8Slice
-        private constructor()
+        readonly __Uint8Slice: Uint8Slice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
@@ -748,8 +738,7 @@ declare module "stdgo/builtin" {
     function Uint8Slice(len: NumberLike, cap: NumberLike): Uint8Slice
     function isUint8Slice(v: any): v is Uint8Slice
     interface Float64Slice extends Slice<Float64> {
-        private readonly __Float64Slice: Float64Slice
-        private constructor()
+        readonly __Float64Slice: Float64Slice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
@@ -770,8 +759,7 @@ declare module "stdgo/builtin" {
     function Float64Slice(len: NumberLike, cap: NumberLike): Float64Slice
     function isFloat64Slice(v: any): v is Float64Slice
     interface Float32Slice extends Slice<Float32> {
-        private readonly __Float32Slice: Float32Slice
-        private constructor()
+        readonly __Float32Slice: Float32Slice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)

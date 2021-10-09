@@ -193,7 +193,7 @@ func (f *factory) isInt(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Int(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result int
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -208,7 +208,7 @@ func (f *factory) Int(call goja.FunctionCall) goja.Value {
 				}
 			}
 			val, e := strconv.ParseInt(s, base, 64)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = int(val)
@@ -404,7 +404,7 @@ func (f *factory) isInt64(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Int64(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result int64
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -419,7 +419,7 @@ func (f *factory) Int64(call goja.FunctionCall) goja.Value {
 				}
 			}
 			val, e := strconv.ParseInt(s, base, 64)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = val
@@ -615,7 +615,7 @@ func (f *factory) isInt32(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Int32(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result int32
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -630,7 +630,7 @@ func (f *factory) Int32(call goja.FunctionCall) goja.Value {
 				}
 			}
 			val, e := strconv.ParseInt(s, base, 32)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = int32(val)
@@ -826,7 +826,7 @@ func (f *factory) isInt16(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Int16(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result int16
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -841,7 +841,7 @@ func (f *factory) Int16(call goja.FunctionCall) goja.Value {
 				}
 			}
 			val, e := strconv.ParseInt(s, base, 16)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = int16(val)
@@ -1037,7 +1037,7 @@ func (f *factory) isInt8(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Int8(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result int8
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -1052,7 +1052,7 @@ func (f *factory) Int8(call goja.FunctionCall) goja.Value {
 				}
 			}
 			val, e := strconv.ParseInt(s, base, 8)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = int8(val)
@@ -1238,7 +1238,7 @@ func (f *factory) isUint(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Uint(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result uint
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -1253,7 +1253,7 @@ func (f *factory) Uint(call goja.FunctionCall) goja.Value {
 				}
 			}
 			val, e := strconv.ParseUint(s, base, 64)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = uint(val)
@@ -1439,7 +1439,7 @@ func (f *factory) isUint64(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Uint64(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result uint64
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -1454,7 +1454,7 @@ func (f *factory) Uint64(call goja.FunctionCall) goja.Value {
 				}
 			}
 			val, e := strconv.ParseUint(s, base, 64)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = val
@@ -1640,7 +1640,7 @@ func (f *factory) isUint32(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Uint32(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result uint32
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -1655,7 +1655,7 @@ func (f *factory) Uint32(call goja.FunctionCall) goja.Value {
 				}
 			}
 			val, e := strconv.ParseUint(s, base, 32)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = uint32(val)
@@ -1841,7 +1841,7 @@ func (f *factory) isUint16(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Uint16(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result uint16
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -1856,7 +1856,7 @@ func (f *factory) Uint16(call goja.FunctionCall) goja.Value {
 				}
 			}
 			val, e := strconv.ParseUint(s, base, 16)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = uint16(val)
@@ -2042,7 +2042,7 @@ func (f *factory) isUint8(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Uint8(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result uint8
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -2057,7 +2057,7 @@ func (f *factory) Uint8(call goja.FunctionCall) goja.Value {
 				}
 			}
 			val, e := strconv.ParseUint(s, base, 8)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = uint8(val)
@@ -2196,7 +2196,7 @@ func (f *factory) isFloat64(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Float64(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result float64
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -2204,7 +2204,7 @@ func (f *factory) Float64(call goja.FunctionCall) goja.Value {
 	if count > 0 {
 		if s, ok := args[0].Export().(string); ok {
 			val, e := strconv.ParseFloat(s, 64)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = val
@@ -2343,7 +2343,7 @@ func (f *factory) isFloat32(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Float32(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result float32
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -2351,7 +2351,7 @@ func (f *factory) Float32(call goja.FunctionCall) goja.Value {
 	if count > 0 {
 		if s, ok := args[0].Export().(string); ok {
 			val, e := strconv.ParseFloat(s, 32)
-			if e != nil {
+			if e !=nil {
 				panic(r.NewGoError(e))
 			}
 			result = float32(val)
@@ -2461,7 +2461,7 @@ func (f *factory) isIntSlice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) IntSlice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []int
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -2586,7 +2586,7 @@ func (f *factory) isInt64Slice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Int64Slice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []int64
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -2711,7 +2711,7 @@ func (f *factory) isInt32Slice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Int32Slice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []int32
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -2836,7 +2836,7 @@ func (f *factory) isInt16Slice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Int16Slice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []int16
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -2961,7 +2961,7 @@ func (f *factory) isInt8Slice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Int8Slice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []int8
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -3086,7 +3086,7 @@ func (f *factory) isUintSlice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) UintSlice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []uint
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -3211,7 +3211,7 @@ func (f *factory) isUint64Slice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Uint64Slice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []uint64
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -3336,7 +3336,7 @@ func (f *factory) isUint32Slice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Uint32Slice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []uint32
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -3461,7 +3461,7 @@ func (f *factory) isUint16Slice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Uint16Slice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []uint16
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -3586,7 +3586,7 @@ func (f *factory) isUint8Slice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Uint8Slice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []uint8
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -3711,7 +3711,7 @@ func (f *factory) isFloat64Slice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Float64Slice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []float64
 		args   = call.Arguments
 		count  = len(call.Arguments)
@@ -3836,7 +3836,7 @@ func (f *factory) isFloat32Slice(call goja.FunctionCall) goja.Value {
 }
 func (f *factory) Float32Slice(call goja.FunctionCall) goja.Value {
 	var (
-		r      = f.runtime
+		r = f.runtime
 		result []float32
 		args   = call.Arguments
 		count  = len(call.Arguments)

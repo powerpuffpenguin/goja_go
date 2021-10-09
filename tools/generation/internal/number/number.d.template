@@ -62,7 +62,7 @@ declare module "stdgo/builtin" {
     function close(ch: WriteChannel): void
 
     interface Error extends Native {
-        readonly Error: Error
+        readonly __Error: Error
         Error(): string
     }
    
@@ -101,8 +101,7 @@ declare module "stdgo/builtin" {
     function is{{.Name}}(v: any): v is {{.Name}}
     {{end}}{{range.}}
     interface {{.Name}}Slice extends Slice<{{.Name}}> {
-        private readonly __{{.Name}}Slice: {{.Name}}Slice
-        private constructor()
+        readonly __{{.Name}}Slice: {{.Name}}Slice
         String(): string
         Len(): GoInt
         Swap(i: NumberLike, j: NumberLike)
