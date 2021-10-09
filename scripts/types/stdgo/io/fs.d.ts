@@ -11,6 +11,7 @@ declare module "stdgo/io/fs" {
         Error,
         ReadChannel, WriteChannel, Channel,
         Slice, Map,
+        Uintptr, Native,
     } from "stdgo/builtin";
     import *as time from "stdgo/time";
 

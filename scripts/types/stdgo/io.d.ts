@@ -11,8 +11,8 @@ declare module "stdgo/io" {
         Error,
         ReadChannel, WriteChannel, Channel,
         Slice, Map,
+        Uintptr, Native,
     } from "stdgo/builtin";
-
     const SeekStart = 0 // seek relative to the origin of the file
     const SeekCurrent = 1 // seek relative to the current offset
     const SeekEnd = 2 // seek relative to the end

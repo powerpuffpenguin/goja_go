@@ -63,7 +63,7 @@ The following js environment supports the go standard library:
 * ~~mime~~
 * ~~net~~
    * ~~url~~
-* ~~os~~
+* os
 * ~~path~~
    * ~~filepath~~
 * ~~plugin~~
