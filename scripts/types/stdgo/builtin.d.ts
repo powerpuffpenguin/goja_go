@@ -30,6 +30,11 @@ declare module "stdgo/builtin" {
         readonly __SelectCase: SelectCase
     }
 
+    function print(...args: Array<any>): void
+    function printType(...args: Array<any>): void
+    function async<T>(f: () => T): Promise<T>
+    function error(f: () => Error): Error
+
     function append<T>(slice: Slice<T>, ...elems: Array<T>): Slice<T>
     function cap<T>(slice: Slice<T>): Int
     function len<T>(slice: Slice<T>): Int
