@@ -4,10 +4,14 @@ import (
 	"github.com/powerpuffpenguin/goja"
 	"github.com/powerpuffpenguin/goja/require"
 
+	io "github.com/powerpuffpenguin/goja_go/stdgo/io"
+
 	time "github.com/powerpuffpenguin/goja_go/stdgo/time"
 )
 
 var modules = []module{
+	{io.ModuleID, io.Require},
+
 	{time.ModuleID, time.Require},
 }
 
