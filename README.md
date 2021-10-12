@@ -4,9 +4,9 @@
 
 The following js environment supports the go standard library:
 
-* ~~archive~~
-   * ~~tar~~
-   * ~~zip~~
+* archive
+   * tar
+   * zip
 * bufio
 * bytes
 * ~~compress~~
@@ -62,7 +62,7 @@ The following js environment supports the go standard library:
 * ~~math~~
 * ~~mime~~
 * ~~net~~
-   * ~~url~~
+   * url
 * os
 * path
    * filepath
