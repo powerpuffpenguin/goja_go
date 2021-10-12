@@ -4,7 +4,11 @@ import (
 	"github.com/powerpuffpenguin/goja"
 	"github.com/powerpuffpenguin/goja/require"
 
+	context "github.com/powerpuffpenguin/goja_go/stdgo/context"
+
 	errors "github.com/powerpuffpenguin/goja_go/stdgo/errors"
+
+	fmt "github.com/powerpuffpenguin/goja_go/stdgo/fmt"
 
 	io "github.com/powerpuffpenguin/goja_go/stdgo/io"
 	io_fs "github.com/powerpuffpenguin/goja_go/stdgo/io/fs"
@@ -19,7 +23,11 @@ import (
 )
 
 var modules = []module{
+	{context.ModuleID, context.Require},
+
 	{errors.ModuleID, errors.Require},
+
+	{fmt.ModuleID, fmt.Require},
 
 	{io.ModuleID, io.Require},
 	{io_fs.ModuleID, io_fs.Require},

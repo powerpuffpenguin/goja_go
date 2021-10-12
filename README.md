@@ -41,7 +41,7 @@ The following js environment supports the go standard library:
 * ~~debug~~
 * ~~embed~~
 * ~~encoding~~
-* ~~errors~~
+* errors
 * ~~expvar~~
 * ~~flag~~
 * ~~fmt~~

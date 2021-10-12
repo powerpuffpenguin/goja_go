@@ -12,7 +12,7 @@
 
     // / <reference path="bufio.d.ts" />
     // / <reference path="bytes.d.ts" />
-    // / <reference path="context.d.ts" />
+/// <reference path="context.d.ts" />
 
     // / <reference path="crypto.d.ts" />
     // / <reference path="crypto/aes.d.ts" />
@@ -27,7 +27,7 @@
 
 /// <reference path="errors.d.ts" />
 
-    // / <reference path="fmt.d.ts" />
+/// <reference path="fmt.d.ts" />
 
     // / <reference path="hash.d.ts" />
     // / <reference path="hash/adler32.d.ts" />
