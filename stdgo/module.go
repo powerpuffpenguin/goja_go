@@ -4,6 +4,9 @@ import (
 	"github.com/powerpuffpenguin/goja"
 	"github.com/powerpuffpenguin/goja/require"
 
+	archive_tar "github.com/powerpuffpenguin/goja_go/stdgo/archive/tar"
+	archive_zip "github.com/powerpuffpenguin/goja_go/stdgo/archive/zip"
+
 	bufio "github.com/powerpuffpenguin/goja_go/stdgo/bufio"
 	bytes "github.com/powerpuffpenguin/goja_go/stdgo/bytes"
 	context "github.com/powerpuffpenguin/goja_go/stdgo/context"
@@ -25,6 +28,9 @@ import (
 )
 
 var modules = []module{
+	{archive_tar.ModuleID, archive_tar.Require},
+	{archive_zip.ModuleID, archive_zip.Require},
+
 	{bufio.ModuleID, bufio.Require},
 	{bytes.ModuleID, bytes.Require},
 	{context.ModuleID, context.Require},

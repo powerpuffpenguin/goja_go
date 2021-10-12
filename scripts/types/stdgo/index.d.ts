@@ -1,8 +1,8 @@
 /// <reference path="globals.d.ts" />
 /// <reference path="builtin.d.ts" />
 
-    // / <reference path="archive/tar.d.ts" />
-    // / <reference path="archive/zip.d.ts" />
+/// <reference path="archive/tar.d.ts" />
+/// <reference path="archive/zip.d.ts" />
 
     // / <reference path="compress/bzip2.d.ts" />
     // / <reference path="compress/flate.d.ts" />

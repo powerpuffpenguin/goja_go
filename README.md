@@ -7,8 +7,8 @@ The following js environment supports the go standard library:
 * ~~archive~~
    * ~~tar~~
    * ~~zip~~
-* ~~bufio~~
-* ~~bytes~~
+* bufio
+* bytes
 * ~~compress~~
    * ~~bzip2~~
    * ~~flate~~
@@ -16,7 +16,7 @@ The following js environment supports the go standard library:
    * ~~lzw~~
    * ~~zlib~~
 * ~~container~~
-* ~~context~~
+* context
 * ~~crypto~~
    * ~~aes~~
    * ~~cipher~~
@@ -44,7 +44,7 @@ The following js environment supports the go standard library:
 * errors
 * ~~expvar~~
 * ~~flag~~
-* ~~fmt~~
+* fmt
 * ~~go~~
 * ~~hash~~
    * ~~adler32~~
