@@ -10,8 +10,8 @@
     // / <reference path="compress/lzw.d.ts" />
     // / <reference path="compress/zlib.d.ts" />
 
-    // / <reference path="bufio.d.ts" />
-    // / <reference path="bytes.d.ts" />
+/// <reference path="bufio.d.ts" />
+/// <reference path="bytes.d.ts" />
 /// <reference path="context.d.ts" />
 
     // / <reference path="crypto.d.ts" />

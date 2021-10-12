@@ -4,6 +4,8 @@ import (
 	"github.com/powerpuffpenguin/goja"
 	"github.com/powerpuffpenguin/goja/require"
 
+	bufio "github.com/powerpuffpenguin/goja_go/stdgo/bufio"
+	bytes "github.com/powerpuffpenguin/goja_go/stdgo/bytes"
 	context "github.com/powerpuffpenguin/goja_go/stdgo/context"
 
 	errors "github.com/powerpuffpenguin/goja_go/stdgo/errors"
@@ -23,6 +25,8 @@ import (
 )
 
 var modules = []module{
+	{bufio.ModuleID, bufio.Require},
+	{bytes.ModuleID, bytes.Require},
 	{context.ModuleID, context.Require},
 
 	{errors.ModuleID, errors.Require},
