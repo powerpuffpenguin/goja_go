@@ -4,11 +4,11 @@
 /// <reference path="archive/tar.d.ts" />
 /// <reference path="archive/zip.d.ts" />
 
-    // / <reference path="compress/bzip2.d.ts" />
-    // / <reference path="compress/flate.d.ts" />
-    // / <reference path="compress/gzip.d.ts" />
-    // / <reference path="compress/lzw.d.ts" />
-    // / <reference path="compress/zlib.d.ts" />
+/// <reference path="compress/bzip2.d.ts" />
+/// <reference path="compress/flate.d.ts" />
+/// <reference path="compress/gzip.d.ts" />
+/// <reference path="compress/lzw.d.ts" />
+/// <reference path="compress/zlib.d.ts" />
 
 /// <reference path="bufio.d.ts" />
 /// <reference path="bytes.d.ts" />

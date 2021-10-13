@@ -9,12 +9,12 @@ The following js environment supports the go standard library:
    * zip
 * bufio
 * bytes
-* ~~compress~~
-   * ~~bzip2~~
-   * ~~flate~~
-   * ~~gzip~~
-   * ~~lzw~~
-   * ~~zlib~~
+* compress
+   * bzip2
+   * flate
+   * gzip
+   * lzw
+   * zlib
 * ~~container~~
 * context
 * ~~crypto~~

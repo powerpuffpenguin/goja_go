@@ -7,6 +7,12 @@ import (
 	archive_tar "github.com/powerpuffpenguin/goja_go/stdgo/archive/tar"
 	archive_zip "github.com/powerpuffpenguin/goja_go/stdgo/archive/zip"
 
+	compress_bzip2 "github.com/powerpuffpenguin/goja_go/stdgo/compress/bzip2"
+	compress_flate "github.com/powerpuffpenguin/goja_go/stdgo/compress/flate"
+	compress_gzip "github.com/powerpuffpenguin/goja_go/stdgo/compress/gzip"
+	compress_lzw "github.com/powerpuffpenguin/goja_go/stdgo/compress/lzw"
+	compress_zlib "github.com/powerpuffpenguin/goja_go/stdgo/compress/zlib"
+
 	bufio "github.com/powerpuffpenguin/goja_go/stdgo/bufio"
 	bytes "github.com/powerpuffpenguin/goja_go/stdgo/bytes"
 	context "github.com/powerpuffpenguin/goja_go/stdgo/context"
@@ -40,6 +46,12 @@ import (
 var modules = []module{
 	{archive_tar.ModuleID, archive_tar.Require},
 	{archive_zip.ModuleID, archive_zip.Require},
+
+	{compress_bzip2.ModuleID, compress_bzip2.Require},
+	{compress_flate.ModuleID, compress_flate.Require},
+	{compress_gzip.ModuleID, compress_gzip.Require},
+	{compress_lzw.ModuleID, compress_lzw.Require},
+	{compress_zlib.ModuleID, compress_zlib.Require},
 
 	{bufio.ModuleID, bufio.Require},
 	{bytes.ModuleID, bytes.Require},
