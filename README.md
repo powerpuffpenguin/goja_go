@@ -68,7 +68,7 @@ The following js environment supports the go standard library:
    * filepath
 * ~~plugin~~
 * ~~reflect~~
-* ~~regexp~~
+* regexp
 * ~~runtime~~
 * sort
 * strconv
