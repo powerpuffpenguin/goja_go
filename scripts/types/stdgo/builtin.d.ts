@@ -35,7 +35,6 @@ declare module "stdgo/builtin" {
     function async<T>(f: T, ...args: Parameters<T>): Promise<ReturnType<T>>
     function error<T>(f: T, ...args: Parameters<T>): Error
 
-
     function append<T>(slice: Slice<T>, ...elems: Array<T>): Slice<T>
     function cap<T>(slice: Slice<T>): Int
     function len<T>(slice: Slice<T>): Int

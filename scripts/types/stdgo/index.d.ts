@@ -29,12 +29,12 @@
 
 /// <reference path="fmt.d.ts" />
 
-    // / <reference path="hash.d.ts" />
-    // / <reference path="hash/adler32.d.ts" />
-    // / <reference path="hash/crc32.d.ts" />
-    // / <reference path="hash/crc64.d.ts" />
-    // / <reference path="hash/fnv.d.ts" />
-    // / <reference path="hash/maphash.d.ts" />
+/// <reference path="hash.d.ts" />
+/// <reference path="hash/adler32.d.ts" />
+/// <reference path="hash/crc32.d.ts" />
+/// <reference path="hash/crc64.d.ts" />
+/// <reference path="hash/fnv.d.ts" />
+/// <reference path="hash/maphash.d.ts" />
 
 /// <reference path="io.d.ts" />
 /// <reference path="io/fs.d.ts" />

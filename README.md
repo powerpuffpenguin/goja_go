@@ -46,12 +46,12 @@ The following js environment supports the go standard library:
 * ~~flag~~
 * fmt
 * ~~go~~
-* ~~hash~~
-   * ~~adler32~~
-   * ~~crc32~~
-   * ~~crc64~~
-   * ~~fnv~~
-   * ~~maphash~~
+* hash
+   * adler32
+   * crc32
+   * crc64
+   * fnv
+   * maphash
 * ~~html~~
 * ~~image~~
 * ~~index~~
@@ -61,7 +61,7 @@ The following js environment supports the go standard library:
 * ~~log~~
 * ~~math~~
 * ~~mime~~
-* ~~net~~
+* net
    * url
 * os
 * path

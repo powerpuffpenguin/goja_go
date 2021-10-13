@@ -15,6 +15,13 @@ import (
 
 	fmt "github.com/powerpuffpenguin/goja_go/stdgo/fmt"
 
+	hash "github.com/powerpuffpenguin/goja_go/stdgo/hash"
+	hash_adler32 "github.com/powerpuffpenguin/goja_go/stdgo/hash/adler32"
+	hash_crc32 "github.com/powerpuffpenguin/goja_go/stdgo/hash/crc32"
+	hash_crc64 "github.com/powerpuffpenguin/goja_go/stdgo/hash/crc64"
+	hash_fnv "github.com/powerpuffpenguin/goja_go/stdgo/hash/fnv"
+	hash_maphash "github.com/powerpuffpenguin/goja_go/stdgo/hash/maphash"
+
 	io "github.com/powerpuffpenguin/goja_go/stdgo/io"
 	io_fs "github.com/powerpuffpenguin/goja_go/stdgo/io/fs"
 	io_ioutil "github.com/powerpuffpenguin/goja_go/stdgo/io/ioutil"
@@ -41,6 +48,13 @@ var modules = []module{
 	{errors.ModuleID, errors.Require},
 
 	{fmt.ModuleID, fmt.Require},
+
+	{hash.ModuleID, hash.Require},
+	{hash_adler32.ModuleID, hash_adler32.Require},
+	{hash_crc32.ModuleID, hash_crc32.Require},
+	{hash_crc64.ModuleID, hash_crc64.Require},
+	{hash_fnv.ModuleID, hash_fnv.Require},
+	{hash_maphash.ModuleID, hash_maphash.Require},
 
 	{io.ModuleID, io.Require},
 	{io_fs.ModuleID, io_fs.Require},
