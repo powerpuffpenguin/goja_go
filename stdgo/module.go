@@ -19,6 +19,7 @@ import (
 	io_fs "github.com/powerpuffpenguin/goja_go/stdgo/io/fs"
 	io_ioutil "github.com/powerpuffpenguin/goja_go/stdgo/io/ioutil"
 
+	net "github.com/powerpuffpenguin/goja_go/stdgo/net"
 	net_url "github.com/powerpuffpenguin/goja_go/stdgo/net/url"
 
 	os "github.com/powerpuffpenguin/goja_go/stdgo/os"
@@ -45,6 +46,7 @@ var modules = []module{
 	{io_fs.ModuleID, io_fs.Require},
 	{io_ioutil.ModuleID, io_ioutil.Require},
 
+	{net.ModuleID, net.Require},
 	{net_url.ModuleID, net_url.Require},
 
 	{os.ModuleID, os.Require},
