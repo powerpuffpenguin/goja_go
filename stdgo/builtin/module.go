@@ -19,7 +19,6 @@ type factory struct {
 	utils.Definer
 	runtime *goja.Runtime
 	exports *goja.Object
-	style   CallStyle
 }
 
 func newFactory(runtime *goja.Runtime, exports *goja.Object) *factory {

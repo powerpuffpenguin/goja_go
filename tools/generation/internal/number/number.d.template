@@ -103,15 +103,15 @@ declare module "stdgo/builtin" {
     interface {{.Name}}Slice extends Slice<{{.Name}}> {
         readonly __{{.Name}}Slice: {{.Name}}Slice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: Go{{.Name}}Array): GoInt
-        Slice(start: NumberLike): Go{{.Name}}Array
-        SliceEnd(start: NumberLike, end: NumberLike): Go{{.Name}}Array
-        Append(...data: Array<NumberLike>): Go{{.Name}}Array
-        Get(index: NumberLike): Go{{.Name}}
+        Cap(): Int
+        Copy(src: {{.Name}}Slice): Int
+        Slice(start: NumberLike): {{.Name}}Slice
+        Slice2(start: NumberLike, end: NumberLike): {{.Name}}Slice
+        Append(...data: Array<NumberLike>): {{.Name}}Slice
+        Get(index: NumberLike): {{.Name}}
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()

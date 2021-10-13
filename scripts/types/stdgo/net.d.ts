@@ -8,14 +8,11 @@ declare module "stdgo/net" {
         Float32Slice, Float64Slice,
         Int64Slice, Int32Slice, Int16Slice, Int8Slice, IntSlice,
         Uint64Slice, Uint32Slice, Uint16Slice, Uint8Slice, UintSlice,
-        Error,
         ReadChannel, WriteChannel, Channel,
         Slice, Map,
         Uintptr, Native,
     } from "stdgo/builtin";
-    import {
-        Error as Error0
-    } from "stdgo/builtin";
+    import *as builtin from "stdgo/builtin";
     import * as io from "stdgo/io";
     import * as os from "stdgo/os";
     import * as time from "stdgo/time";
@@ -38,8 +35,8 @@ declare module "stdgo/net" {
     const IPv6linklocalallrouters: IP // IP{0xff, 0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x02}
 
     const DefaultResolver: ResolverPointer
-    const ErrClosed: Error
-    const ErrWriteToConnected: Error
+    const ErrClosed: builtin.Error
+    const ErrWriteToConnected: builtin.Error
 
     function JoinHostPort(host: string, port: string): string
     function LookupAddr(addr: string): Array<string>
@@ -58,7 +55,7 @@ declare module "stdgo/net" {
         String(): string  // string form of address (for example, "192.0.2.1:25", "[2001:db8::1]:80")
     }
 
-    interface AddrError extends Error {
+    interface AddrError extends builtin.Error {
         Err: string
         Addr: string
 
@@ -87,16 +84,16 @@ declare module "stdgo/net" {
         SetWriteDeadline(t: time.Time)
     }
 
-    interface DNSConfigErrorPointer extends Error {
+    interface DNSConfigErrorPointer extends builtin.Error {
         readonly __DNSConfigErrorPointer: DNSConfigErrorPointer
 
-        Err: Error
+        Err: builtin.Error
 
         Temporary(): boolean
         Timeout(): boolean
-        Unwrap(): Error
+        Unwrap(): builtin.Error
     }
-    interface DNSErrorPointer extends Error {
+    interface DNSErrorPointer extends builtin.Error {
         readonly __DNSErrorPointer: DNSErrorPointer
 
         Err: string // description of the error
@@ -128,7 +125,7 @@ declare module "stdgo/net" {
         DialContext(ctx: context.Context, network: string, address: string): Conn
     }
 
-    interface Error extends Error {
+    interface Error extends builtin.Error {
         Timeout(): boolean   // Is the error a timeout?
         Temporary(): boolean // Is the error temporary?
     }
@@ -249,7 +246,7 @@ declare module "stdgo/net" {
         MulticastAddrs(): Array<Addr>
     }
 
-    interface InvalidAddrError extends Error0 {
+    interface InvalidAddrError extends builtin.Error {
         Temporary(): boolean
         Timeout(): boolean
     }
@@ -283,18 +280,18 @@ declare module "stdgo/net" {
         Host: string
     }
 
-    interface OpErrorPointer extends Error0 {
+    interface OpErrorPointer extends builtin.Error {
         readonly __OpErrorPointer: OpErrorPointer
 
         Op: string
         Net: string
         Source: Addr
         Addr: Addr
-        Err: Error0
+        Err: builtin.Error
 
         Temporary(): boolean
         Timeout(): boolean
-        Unwrap(): Error0
+        Unwrap(): builtin.Error
     }
 
     function FilePacketConn(f: os.FilePointer): PacketConn
@@ -310,7 +307,7 @@ declare module "stdgo/net" {
         SetWriteDeadline(t: time.Time)
     }
 
-    interface ParseErrorPointer extends Error0 {
+    interface ParseErrorPointer extends builtin.Error {
         readonly __ParseErrorPointer: ParseErrorPointer
         Type: string
         Text: string
@@ -495,7 +492,7 @@ declare module "stdgo/net" {
         SyscallConn(): syscall.RawConn
     }
 
-    interface UnknownNetworkError extends Error0 {
+    interface UnknownNetworkError extends builtin.Error {
         readonly __UnknownNetworkError: UnknownNetworkError
 
         Temporary(): boolean

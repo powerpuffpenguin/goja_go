@@ -32,8 +32,9 @@ declare module "stdgo/builtin" {
 
     function print(...args: Array<any>): void
     function printType(...args: Array<any>): void
-    function async<T>(f: () => T): Promise<T>
-    function error(f: () => Error): Error
+    function async<T>(f: T, ...args: Parameters<T>): Promise<ReturnType<T>>
+    function error<T>(f: T, ...args: Parameters<T>): Error
+
 
     function append<T>(slice: Slice<T>, ...elems: Array<T>): Slice<T>
     function cap<T>(slice: Slice<T>): Int
@@ -530,15 +531,15 @@ declare module "stdgo/builtin" {
     interface IntSlice extends Slice<Int> {
         readonly __IntSlice: IntSlice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoIntArray): GoInt
-        Slice(start: NumberLike): GoIntArray
-        SliceEnd(start: NumberLike, end: NumberLike): GoIntArray
-        Append(...data: Array<NumberLike>): GoIntArray
-        Get(index: NumberLike): GoInt
+        Cap(): Int
+        Copy(src: IntSlice): Int
+        Slice(start: NumberLike): IntSlice
+        Slice2(start: NumberLike, end: NumberLike): IntSlice
+        Append(...data: Array<NumberLike>): IntSlice
+        Get(index: NumberLike): Int
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()
@@ -551,15 +552,15 @@ declare module "stdgo/builtin" {
     interface Int64Slice extends Slice<Int64> {
         readonly __Int64Slice: Int64Slice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoInt64Array): GoInt
-        Slice(start: NumberLike): GoInt64Array
-        SliceEnd(start: NumberLike, end: NumberLike): GoInt64Array
-        Append(...data: Array<NumberLike>): GoInt64Array
-        Get(index: NumberLike): GoInt64
+        Cap(): Int
+        Copy(src: Int64Slice): Int
+        Slice(start: NumberLike): Int64Slice
+        Slice2(start: NumberLike, end: NumberLike): Int64Slice
+        Append(...data: Array<NumberLike>): Int64Slice
+        Get(index: NumberLike): Int64
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()
@@ -572,15 +573,15 @@ declare module "stdgo/builtin" {
     interface Int32Slice extends Slice<Int32> {
         readonly __Int32Slice: Int32Slice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoInt32Array): GoInt
-        Slice(start: NumberLike): GoInt32Array
-        SliceEnd(start: NumberLike, end: NumberLike): GoInt32Array
-        Append(...data: Array<NumberLike>): GoInt32Array
-        Get(index: NumberLike): GoInt32
+        Cap(): Int
+        Copy(src: Int32Slice): Int
+        Slice(start: NumberLike): Int32Slice
+        Slice2(start: NumberLike, end: NumberLike): Int32Slice
+        Append(...data: Array<NumberLike>): Int32Slice
+        Get(index: NumberLike): Int32
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()
@@ -593,15 +594,15 @@ declare module "stdgo/builtin" {
     interface Int16Slice extends Slice<Int16> {
         readonly __Int16Slice: Int16Slice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoInt16Array): GoInt
-        Slice(start: NumberLike): GoInt16Array
-        SliceEnd(start: NumberLike, end: NumberLike): GoInt16Array
-        Append(...data: Array<NumberLike>): GoInt16Array
-        Get(index: NumberLike): GoInt16
+        Cap(): Int
+        Copy(src: Int16Slice): Int
+        Slice(start: NumberLike): Int16Slice
+        Slice2(start: NumberLike, end: NumberLike): Int16Slice
+        Append(...data: Array<NumberLike>): Int16Slice
+        Get(index: NumberLike): Int16
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()
@@ -614,15 +615,15 @@ declare module "stdgo/builtin" {
     interface Int8Slice extends Slice<Int8> {
         readonly __Int8Slice: Int8Slice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoInt8Array): GoInt
-        Slice(start: NumberLike): GoInt8Array
-        SliceEnd(start: NumberLike, end: NumberLike): GoInt8Array
-        Append(...data: Array<NumberLike>): GoInt8Array
-        Get(index: NumberLike): GoInt8
+        Cap(): Int
+        Copy(src: Int8Slice): Int
+        Slice(start: NumberLike): Int8Slice
+        Slice2(start: NumberLike, end: NumberLike): Int8Slice
+        Append(...data: Array<NumberLike>): Int8Slice
+        Get(index: NumberLike): Int8
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()
@@ -635,15 +636,15 @@ declare module "stdgo/builtin" {
     interface UintSlice extends Slice<Uint> {
         readonly __UintSlice: UintSlice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoUintArray): GoInt
-        Slice(start: NumberLike): GoUintArray
-        SliceEnd(start: NumberLike, end: NumberLike): GoUintArray
-        Append(...data: Array<NumberLike>): GoUintArray
-        Get(index: NumberLike): GoUint
+        Cap(): Int
+        Copy(src: UintSlice): Int
+        Slice(start: NumberLike): UintSlice
+        Slice2(start: NumberLike, end: NumberLike): UintSlice
+        Append(...data: Array<NumberLike>): UintSlice
+        Get(index: NumberLike): Uint
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()
@@ -656,15 +657,15 @@ declare module "stdgo/builtin" {
     interface Uint64Slice extends Slice<Uint64> {
         readonly __Uint64Slice: Uint64Slice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoUint64Array): GoInt
-        Slice(start: NumberLike): GoUint64Array
-        SliceEnd(start: NumberLike, end: NumberLike): GoUint64Array
-        Append(...data: Array<NumberLike>): GoUint64Array
-        Get(index: NumberLike): GoUint64
+        Cap(): Int
+        Copy(src: Uint64Slice): Int
+        Slice(start: NumberLike): Uint64Slice
+        Slice2(start: NumberLike, end: NumberLike): Uint64Slice
+        Append(...data: Array<NumberLike>): Uint64Slice
+        Get(index: NumberLike): Uint64
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()
@@ -677,15 +678,15 @@ declare module "stdgo/builtin" {
     interface Uint32Slice extends Slice<Uint32> {
         readonly __Uint32Slice: Uint32Slice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoUint32Array): GoInt
-        Slice(start: NumberLike): GoUint32Array
-        SliceEnd(start: NumberLike, end: NumberLike): GoUint32Array
-        Append(...data: Array<NumberLike>): GoUint32Array
-        Get(index: NumberLike): GoUint32
+        Cap(): Int
+        Copy(src: Uint32Slice): Int
+        Slice(start: NumberLike): Uint32Slice
+        Slice2(start: NumberLike, end: NumberLike): Uint32Slice
+        Append(...data: Array<NumberLike>): Uint32Slice
+        Get(index: NumberLike): Uint32
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()
@@ -698,15 +699,15 @@ declare module "stdgo/builtin" {
     interface Uint16Slice extends Slice<Uint16> {
         readonly __Uint16Slice: Uint16Slice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoUint16Array): GoInt
-        Slice(start: NumberLike): GoUint16Array
-        SliceEnd(start: NumberLike, end: NumberLike): GoUint16Array
-        Append(...data: Array<NumberLike>): GoUint16Array
-        Get(index: NumberLike): GoUint16
+        Cap(): Int
+        Copy(src: Uint16Slice): Int
+        Slice(start: NumberLike): Uint16Slice
+        Slice2(start: NumberLike, end: NumberLike): Uint16Slice
+        Append(...data: Array<NumberLike>): Uint16Slice
+        Get(index: NumberLike): Uint16
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()
@@ -719,15 +720,15 @@ declare module "stdgo/builtin" {
     interface Uint8Slice extends Slice<Uint8> {
         readonly __Uint8Slice: Uint8Slice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoUint8Array): GoInt
-        Slice(start: NumberLike): GoUint8Array
-        SliceEnd(start: NumberLike, end: NumberLike): GoUint8Array
-        Append(...data: Array<NumberLike>): GoUint8Array
-        Get(index: NumberLike): GoUint8
+        Cap(): Int
+        Copy(src: Uint8Slice): Int
+        Slice(start: NumberLike): Uint8Slice
+        Slice2(start: NumberLike, end: NumberLike): Uint8Slice
+        Append(...data: Array<NumberLike>): Uint8Slice
+        Get(index: NumberLike): Uint8
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()
@@ -740,15 +741,15 @@ declare module "stdgo/builtin" {
     interface Float64Slice extends Slice<Float64> {
         readonly __Float64Slice: Float64Slice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoFloat64Array): GoInt
-        Slice(start: NumberLike): GoFloat64Array
-        SliceEnd(start: NumberLike, end: NumberLike): GoFloat64Array
-        Append(...data: Array<NumberLike>): GoFloat64Array
-        Get(index: NumberLike): GoFloat64
+        Cap(): Int
+        Copy(src: Float64Slice): Int
+        Slice(start: NumberLike): Float64Slice
+        Slice2(start: NumberLike, end: NumberLike): Float64Slice
+        Append(...data: Array<NumberLike>): Float64Slice
+        Get(index: NumberLike): Float64
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()
@@ -761,15 +762,15 @@ declare module "stdgo/builtin" {
     interface Float32Slice extends Slice<Float32> {
         readonly __Float32Slice: Float32Slice
         String(): string
-        Len(): GoInt
+        Len(): Int
         Swap(i: NumberLike, j: NumberLike)
         Less(i: NumberLike, j: NumberLike): boolean
-        Cap(): GoInt
-        Copy(src: GoFloat32Array): GoInt
-        Slice(start: NumberLike): GoFloat32Array
-        SliceEnd(start: NumberLike, end: NumberLike): GoFloat32Array
-        Append(...data: Array<NumberLike>): GoFloat32Array
-        Get(index: NumberLike): GoFloat32
+        Cap(): Int
+        Copy(src: Float32Slice): Int
+        Slice(start: NumberLike): Float32Slice
+        Slice2(start: NumberLike, end: NumberLike): Float32Slice
+        Append(...data: Array<NumberLike>): Float32Slice
+        Get(index: NumberLike): Float32
         Set(index: NumberLike, val: NumberLike)
         Join(sep: string): string
         Asc()

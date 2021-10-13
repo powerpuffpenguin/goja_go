@@ -9,7 +9,7 @@ import (
 
 	"github.com/powerpuffpenguin/goja"
 	"github.com/powerpuffpenguin/goja/loop"
-	"github.com/powerpuffpenguin/goja/require"
+	"github.com/powerpuffpenguin/goja_go/core/utils"
 )
 
 type CallStyle int
@@ -32,8 +32,8 @@ func (f *factory) error(call goja.FunctionCall) goja.Value {
 	if !ok {
 		panic(runtime.NewTypeError(`arg0 not callable`))
 	}
-	f.style = callErr
-	defer f.recover()
+	defer utils.Recover(runtime)
+	call.Arguments[0] = runtime.ToValue(callErr)
 	val, e := callable(goja.Undefined())
 	if e != nil {
 		panic(runtime.NewGoError(e))
@@ -46,27 +46,13 @@ func (f *factory) async(call goja.FunctionCall) goja.Value {
 	if !ok {
 		panic(runtime.NewTypeError(`arg0 not callable`))
 	}
-	f.style = callAsync
-	defer f.recover()
-	val, e := callable(goja.Undefined())
+	defer utils.Recover(runtime)
+	call.Arguments[0] = runtime.ToValue(callAsync)
+	val, e := callable(call.This, call.Arguments...)
 	if e != nil {
 		panic(runtime.NewGoError(e))
 	}
 	return val
-}
-func (f *factory) recover() {
-	if e := recover(); e != nil {
-		f.style = 0
-		if v, ok := e.(goja.Value); ok {
-			panic(v)
-		} else if err, ok := e.(error); ok {
-			panic(f.runtime.NewGoError(err))
-		} else {
-			panic(f.runtime.NewGoError(errors.New(fmt.Sprint(e))))
-		}
-	} else {
-		f.style = 0
-	}
 }
 func print(call goja.FunctionCall) goja.Value {
 	for i, v := range call.Arguments {
@@ -241,28 +227,35 @@ func (c *caller) Reset() {
 	c.noWrap = false
 }
 func (c *caller) Before(runtime *goja.Runtime, call *goja.FunctionCall) (err error) {
+	var (
+		style CallStyle
+	)
 	if len(call.Arguments) != 0 {
-		offset := len(call.Arguments) - 1
-		arg := call.Arguments[offset]
-		if scheduler, ok := arg.Export().(loop.Scheduler); ok {
-			call.Arguments = call.Arguments[:offset]
-			c.scheduler = scheduler
+		if tmp, ok := call.Arguments[0].Export().(CallStyle); ok {
+			call.Arguments = call.Arguments[1:]
+
+			style = tmp
+		}
+
+		if len(call.Arguments) != 0 {
+			offset := len(call.Arguments) - 1
+			arg := call.Arguments[offset]
+			if scheduler, ok := arg.Export().(loop.Scheduler); ok {
+				call.Arguments = call.Arguments[:offset]
+				c.scheduler = scheduler
+			}
 		}
 	}
-
 	if c.scheduler == nil {
-		obj := require.Require(runtime, ModuleID).(*goja.Object).Get(`native`)
-		if factory, ok := obj.Export().(*factory); ok {
-			if (factory.style & callAsync) != 0 {
-				c.scheduler = runtime.Loop().GetScheduler()
-			}
-			if (factory.style & callErr) != 0 {
-				c.err = true
-			}
-			if (factory.style & callNoWrap) != 0 {
-				c.noWrap = true
-			}
+		if (style & callAsync) != 0 {
+			c.scheduler = runtime.Loop().GetScheduler()
 		}
+	}
+	if (style & callErr) != 0 {
+		c.err = true
+	}
+	if (style & callNoWrap) != 0 {
+		c.noWrap = true
 	}
 	return nil
 }
