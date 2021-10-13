@@ -40,6 +40,7 @@ import (
 	path "github.com/powerpuffpenguin/goja_go/stdgo/path"
 	path_filepath "github.com/powerpuffpenguin/goja_go/stdgo/path/filepath"
 
+	strings "github.com/powerpuffpenguin/goja_go/stdgo/strings"
 	time "github.com/powerpuffpenguin/goja_go/stdgo/time"
 )
 
@@ -80,6 +81,7 @@ var modules = []module{
 	{path.ModuleID, path.Require},
 	{path_filepath.ModuleID, path_filepath.Require},
 
+	{strings.ModuleID, strings.Require},
 	{time.ModuleID, time.Require},
 }
 

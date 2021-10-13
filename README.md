@@ -72,7 +72,7 @@ The following js environment supports the go standard library:
 * ~~runtime~~
 * ~~sort~~
 * ~~strconv~~
-* ~~strings~~
+* strings
 * ~~sync~~
 * ~~syscall~~
 * ~~testing~~

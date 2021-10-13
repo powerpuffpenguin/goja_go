@@ -48,8 +48,8 @@
 /// <reference path="path.d.ts" />
 /// <reference path="path/filepath.d.ts" />
 
+/// <reference path="strings.d.ts" />
 /// <reference path="syscall.d.ts" />
-
 /// <reference path="time.d.ts" />
 
 /// <reference path="unicode.d.ts" />
