@@ -64,6 +64,8 @@ The following js environment supports the go standard library:
 * net
    * url
 * os
+   * exec
+   * signal
 * path
    * filepath
 * ~~plugin~~

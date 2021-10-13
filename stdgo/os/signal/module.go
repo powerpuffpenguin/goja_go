@@ -1,4 +1,4 @@
-package os
+package signal
 
 import (
 	"github.com/powerpuffpenguin/goja"
@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	ModuleID = `stdgo/os`
+	ModuleID = `stdgo/os/signal`
 )
 
 func Require(runtime *goja.Runtime, module *goja.Object) {

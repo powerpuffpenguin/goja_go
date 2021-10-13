@@ -44,6 +44,8 @@
 /// <reference path="net/url.d.ts" />
 
 /// <reference path="os.d.ts" />
+/// <reference path="os/exec.d.ts" />
+/// <reference path="os/signal.d.ts" />
 
 /// <reference path="path.d.ts" />
 /// <reference path="path/filepath.d.ts" />

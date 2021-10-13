@@ -188,7 +188,7 @@ declare module "stdgo/os" {
         Dir: string
         Env: Array<string>
         Files: Array<FilePointer>
-        Sys: syscall.SysProcAttr
+        Sys: syscall.SysProcAttrPointer
     }
 
     function FindProcess(pid: Int | NumberLike): ProcessPointer

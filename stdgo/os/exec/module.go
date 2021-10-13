@@ -1,4 +1,4 @@
-package os
+package exec
 
 import (
 	"github.com/powerpuffpenguin/goja"
@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	ModuleID = `stdgo/os`
+	ModuleID = `stdgo/os/exec`
 )
 
 func Require(runtime *goja.Runtime, module *goja.Object) {

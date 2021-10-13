@@ -36,6 +36,8 @@ import (
 	net_url "github.com/powerpuffpenguin/goja_go/stdgo/net/url"
 
 	os "github.com/powerpuffpenguin/goja_go/stdgo/os"
+	os_exec "github.com/powerpuffpenguin/goja_go/stdgo/os/exec"
+	os_signal "github.com/powerpuffpenguin/goja_go/stdgo/os/signal"
 
 	path "github.com/powerpuffpenguin/goja_go/stdgo/path"
 	path_filepath "github.com/powerpuffpenguin/goja_go/stdgo/path/filepath"
@@ -80,6 +82,8 @@ var modules = []module{
 	{net_url.ModuleID, net_url.Require},
 
 	{os.ModuleID, os.Require},
+	{os_exec.ModuleID, os_exec.Require},
+	{os_signal.ModuleID, os_signal.Require},
 
 	{path.ModuleID, path.Require},
 	{path_filepath.ModuleID, path_filepath.Require},

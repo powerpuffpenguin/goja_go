@@ -14,7 +14,7 @@ declare module "stdgo/syscall" {
         Uintptr, Native,
     } from "stdgo/builtin";
 
-    interface SysProcAttr extends Native {
+    interface SysProcAttrPointer extends Native {
         readonly __SysProcAttr: SysProcAttr
     }
     interface RawConn extends Native {
