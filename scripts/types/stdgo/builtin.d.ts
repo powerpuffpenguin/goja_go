@@ -784,4 +784,11 @@ declare module "stdgo/builtin" {
     type Runes = Int32Slice
     type Byte = Uint8
     type Bytes = Uint8Slice
+
+    interface Complex128 extends Native {
+        readonly __Complex128: Complex128
+    }
+    interface Complex64 extends Native {
+        readonly __Complex64: Complex64
+    }
 }
