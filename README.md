@@ -70,8 +70,8 @@ The following js environment supports the go standard library:
 * ~~reflect~~
 * ~~regexp~~
 * ~~runtime~~
-* ~~sort~~
-* ~~strconv~~
+* sort
+* strconv
 * strings
 * ~~sync~~
 * ~~syscall~~

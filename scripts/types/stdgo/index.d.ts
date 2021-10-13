@@ -48,6 +48,7 @@
 /// <reference path="path.d.ts" />
 /// <reference path="path/filepath.d.ts" />
 
+/// <reference path="sort.d.ts" />
 /// <reference path="strconv.d.ts" />
 /// <reference path="strings.d.ts" />
 /// <reference path="syscall.d.ts" />

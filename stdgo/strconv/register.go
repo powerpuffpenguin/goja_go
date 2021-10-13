@@ -44,6 +44,12 @@ func (f *factory) register() {
 	f.Set(`QuoteToGraphic`, strconv.QuoteToGraphic)
 	f.Set(`Unquote`, strconv.Unquote)
 	f.Set(`UnquoteChar`, strconv.UnquoteChar)
+
+	f.Set(`isNumErrorPointer`, isNumErrorPointer)
+}
+func isNumErrorPointer(i interface{}) bool {
+	_, result := i.(*strconv.NumError)
+	return result
 }
 func (f *factory) getIntSize(call goja.FunctionCall) goja.Value {
 	return f.runtime.ToValue(strconv.IntSize)

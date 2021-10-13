@@ -53,4 +53,13 @@ declare module "stdgo/strconv" {
     function Unquote(s: string): string
     /** return (value rune, multibyte bool, tail string, err error) */
     function UnquoteChar(s: string, quote: Byte | NumberLike): [Rune, boolean, string]
+
+    interface NumErrorPointer extends Error {
+        Func: string // the failing function (ParseBool, ParseInt, ParseUint, ParseFloat, ParseComplex)
+        Num: string // the input
+        Err: Error  // the reason the conversion failed (e.g. ErrRange, ErrSyntax, etc.)
+
+        Unwrap(): Error
+    }
+    function isNumErrorPointer(v: any): v is NumErrorPointer
 }
