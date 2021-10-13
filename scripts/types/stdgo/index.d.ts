@@ -40,6 +40,8 @@
 /// <reference path="io/fs.d.ts" />
 /// <reference path="io/ioutil.d.ts" />
 
+/// <reference path="math.d.ts" />
+
 /// <reference path="net.d.ts" />
 /// <reference path="net/url.d.ts" />
 
