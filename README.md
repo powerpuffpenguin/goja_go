@@ -59,7 +59,11 @@ The following js environment supports the go standard library:
    * fs
    * ioutil
 * ~~log~~
-* ~~math~~
+* math
+   * big
+   * bits
+   * cmplx
+   * rand
 * ~~mime~~
 * net
    * url

@@ -33,7 +33,10 @@ import (
 	io_ioutil "github.com/powerpuffpenguin/goja_go/stdgo/io/ioutil"
 
 	math "github.com/powerpuffpenguin/goja_go/stdgo/math"
-
+	math_big "github.com/powerpuffpenguin/goja_go/stdgo/math/big"
+	math_bits "github.com/powerpuffpenguin/goja_go/stdgo/math/bits"
+	math_cmplx "github.com/powerpuffpenguin/goja_go/stdgo/math/cmplx"
+	
 	net "github.com/powerpuffpenguin/goja_go/stdgo/net"
 	net_url "github.com/powerpuffpenguin/goja_go/stdgo/net/url"
 
@@ -81,6 +84,9 @@ var modules = []module{
 	{io_ioutil.ModuleID, io_ioutil.Require},
 
 	{math.ModuleID, math.Require},
+	{math_big.ModuleID, math_big.Require},
+	{math_bits.ModuleID, math_bits.Require},
+	{math_cmplx.ModuleID, math_cmplx.Require},
 
 	{net.ModuleID, net.Require},
 	{net_url.ModuleID, net_url.Require},
