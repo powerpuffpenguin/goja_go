@@ -31,8 +31,12 @@ declare module "stdgo/net/url" {
         Unwrap(): Error
     }
 
-    interface EscapeError extends Error { }
-    interface InvalidHostError extends Error { }
+    interface EscapeError extends Error {
+        readonly __EscapeError: EscapeError
+    }
+    interface InvalidHostError extends Error {
+        readonly __InvalidHostError: InvalidHostError
+    }
 
     function Parse(rawURL: string): URLPointer
     function ParseRequestURI(rawURL: string): URLPointer

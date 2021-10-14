@@ -28,6 +28,16 @@ import (
 	hash_fnv "github.com/powerpuffpenguin/goja_go/stdgo/hash/fnv"
 	hash_maphash "github.com/powerpuffpenguin/goja_go/stdgo/hash/maphash"
 
+	image "github.com/powerpuffpenguin/goja_go/stdgo/image"
+	image_color "github.com/powerpuffpenguin/goja_go/stdgo/image/color"
+	image_color_palette "github.com/powerpuffpenguin/goja_go/stdgo/image/color/palette"
+	image_draw "github.com/powerpuffpenguin/goja_go/stdgo/image/draw"
+	image_gif "github.com/powerpuffpenguin/goja_go/stdgo/image/gif"
+	image_jpeg "github.com/powerpuffpenguin/goja_go/stdgo/image/jpeg"
+	image_png "github.com/powerpuffpenguin/goja_go/stdgo/image/png"
+
+	index_suffixarray "github.com/powerpuffpenguin/goja_go/stdgo/index/suffixarray"
+
 	io "github.com/powerpuffpenguin/goja_go/stdgo/io"
 	io_fs "github.com/powerpuffpenguin/goja_go/stdgo/io/fs"
 	io_ioutil "github.com/powerpuffpenguin/goja_go/stdgo/io/ioutil"
@@ -36,7 +46,7 @@ import (
 	math_big "github.com/powerpuffpenguin/goja_go/stdgo/math/big"
 	math_bits "github.com/powerpuffpenguin/goja_go/stdgo/math/bits"
 	math_cmplx "github.com/powerpuffpenguin/goja_go/stdgo/math/cmplx"
-	
+
 	net "github.com/powerpuffpenguin/goja_go/stdgo/net"
 	net_url "github.com/powerpuffpenguin/goja_go/stdgo/net/url"
 
@@ -78,6 +88,16 @@ var modules = []module{
 	{hash_crc64.ModuleID, hash_crc64.Require},
 	{hash_fnv.ModuleID, hash_fnv.Require},
 	{hash_maphash.ModuleID, hash_maphash.Require},
+
+	{image.ModuleID, image.Require},
+	{image_color.ModuleID, image_color.Require},
+	{image_color_palette.ModuleID, image_color_palette.Require},
+	{image_draw.ModuleID, image_draw.Require},
+	{image_gif.ModuleID, image_gif.Require},
+	{image_jpeg.ModuleID, image_jpeg.Require},
+	{image_png.ModuleID, image_png.Require},
+	
+	{index_suffixarray.ModuleID, index_suffixarray.Require},
 
 	{io.ModuleID, io.Require},
 	{io_fs.ModuleID, io_fs.Require},

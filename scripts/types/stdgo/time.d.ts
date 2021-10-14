@@ -91,6 +91,8 @@ declare module "stdgo/time" {
     }
 
     interface ParseErrorPointer extends Error {
+        readonly __ParseErrorPointer: ParseErrorPointer
+
         Layout: string
         Value: string
         LayoutElem: string

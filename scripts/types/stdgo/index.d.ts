@@ -36,6 +36,16 @@
 /// <reference path="hash/fnv.d.ts" />
 /// <reference path="hash/maphash.d.ts" />
 
+/// <reference path="image.d.ts" />
+/// <reference path="image/color.d.ts" />
+/// <reference path="image/color/palette.d.ts" />
+/// <reference path="image/draw.d.ts" />
+/// <reference path="image/gif.d.ts" />
+/// <reference path="image/jpeg.d.ts" />
+/// <reference path="image/png.d.ts" />
+
+/// <reference path="index/suffixarray.d.ts" />
+
 /// <reference path="io.d.ts" />
 /// <reference path="io/fs.d.ts" />
 /// <reference path="io/ioutil.d.ts" />

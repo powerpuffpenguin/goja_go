@@ -33,7 +33,9 @@ declare module "stdgo/math/big" {
     const Exact = Accuracy(0)
     const Above = Accuracy(+1)
 
-    interface ErrNaN extends Error { }
+    interface ErrNaN extends Error {
+        readonly __ErrNaN: ErrNaN
+    }
 
     function NewFloat(x: Float64 | NumberLike): FloatPointer
     /** return (f * Float, b int, err error) */

@@ -53,8 +53,15 @@ The following js environment supports the go standard library:
    * fnv
    * maphash
 * ~~html~~
-* ~~image~~
-* ~~index~~
+* image
+   * color
+      * palette
+   * draw
+   * gif
+   * jpeg
+   * png
+* index
+   * suffixarray
 * io
    * fs
    * ioutil

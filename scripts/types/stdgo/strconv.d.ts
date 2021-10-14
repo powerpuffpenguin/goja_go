@@ -55,6 +55,7 @@ declare module "stdgo/strconv" {
     function UnquoteChar(s: string, quote: Byte | NumberLike): [Rune, boolean, string]
 
     interface NumErrorPointer extends Error {
+        readonly __NumErrorPointer: NumErrorPointer
         Func: string // the failing function (ParseBool, ParseInt, ParseUint, ParseFloat, ParseComplex)
         Num: string // the input
         Err: Error  // the reason the conversion failed (e.g. ErrRange, ErrSyntax, etc.)
