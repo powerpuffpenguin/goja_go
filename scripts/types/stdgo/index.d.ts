@@ -19,9 +19,9 @@
 /// <reference path="crypto/cipher.d.ts" />
 /// <reference path="crypto/des.d.ts" />
 /// <reference path="crypto/dsa.d.ts" />
-    /// <reference path="crypto/ecdsa.d.ts" />
+/// <reference path="crypto/ecdsa.d.ts" />
     /// <reference path="crypto/ed25519.d.ts" />
-    /// <reference path="crypto/elliptic.d.ts" />
+/// <reference path="crypto/elliptic.d.ts" />
     /// <reference path="crypto/hmac.d.ts" />
     /// <reference path="crypto/md5.d.ts" />
     /// <reference path="crypto/rand.d.ts" />

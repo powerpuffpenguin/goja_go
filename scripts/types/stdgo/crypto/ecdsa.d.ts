@@ -1,4 +1,4 @@
-declare module "stdgo/crypto/dsa" {
+declare module "stdgo/crypto/ecdsa" {
     import {
         Float32, Float64,
         Int64, Int32, Int16, Int8, Int,
@@ -13,42 +13,38 @@ declare module "stdgo/crypto/dsa" {
         Slice, Map,
         Uintptr, Native,
     } from "stdgo/builtin";
+    import * as crypto from "stdgo/crypto";
+    import * as elliptic from "stdgo/crypto/elliptic";
     import * as big from "stdgo/math/big";
     import * as io from "stdgo/io";
 
-    const ErrInvalidPublicKey: Error
-
-    function GenerateKey(priv: PrivateKeyPointer, rand: io.Reader): void
-    function GenerateParameters(params: ParametersPointer, rand: io.Reader, sizes: ParameterSizes): void
     /** return (r, s * big.Int, err error) */
     function Sign(rand: io.Reader, priv: PrivateKeyPointer, hash: Bytes): [big.IntPointer, big.IntPointer]
+    function SignASN1(rand: io.Reader, priv: PrivateKeyPointer, hash: Bytes): Bytes
     function Verify(pub: PublicKeyPointer, hash: Bytes, r: big.IntPointer, s: big.IntPointer): boolean
+    function VerifyASN1(pub: PublicKeyPointer, hash: Bytes, sig: Bytes): boolean
 
-    interface ParameterSizes extends Number {
-        readonly __ParameterSizes: ParameterSizes
-    }
-    const L1024N160: ParameterSizes
-    const L2048N224: ParameterSizes
-    const L2048N256: ParameterSizes
-    const L3072N256: ParameterSizes
-
-    function Parameters(): ParametersPointer
-    interface ParametersPointer extends Native {
-        P: big.IntPointer
-        Q: big.IntPointer
-        G: big.IntPointer
-    }
-    function PrivateKey(): PrivateKeyPointer
+    function GenerateKey(c: elliptic.Curve, rand: io.Reader): PrivateKeyPointer
     interface PrivateKeyPointer extends PublicKeyPointer {
         PublicKey: PublicKeyPointer
+        D: big.IntPointer
+
+        Equal(x: crypto.PrivateKey): boolean
+        Public(): crypto.PublicKey
+        Sign(rand: io.Reader, digest: Bytes, opts: crypto.SignerOpts): Bytes
+    }
+
+    interface PublicKeyPointer extends elliptic.Curve {
+        readonly __PublicKeyPointer: PublicKeyPointer
+
+        Curve: elliptic.Curve
+
         X: big.IntPointer
-    }
-    function PublicKey(): PublicKeyPointer
-    interface PublicKeyPointer extends ParametersPointer {
-        Parameters: ParametersPointer
         Y: big.IntPointer
+
+        Equal(x: crypto.PublicKey): boolean
     }
-    function isParametersPointer(v: any): v is ParametersPointer
+
     function isPrivateKeyPointer(v: any): v is PrivateKeyPointer
     function isPublicKeyPointer(v: any): v is PublicKeyPointer
 }

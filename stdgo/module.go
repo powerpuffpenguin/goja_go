@@ -22,8 +22,8 @@ import (
 	crypto_cipher "github.com/powerpuffpenguin/goja_go/stdgo/crypto/cipher"
 	crypto_des "github.com/powerpuffpenguin/goja_go/stdgo/crypto/des"
 	crypto_dsa "github.com/powerpuffpenguin/goja_go/stdgo/crypto/dsa"
+	crypto_ecdsa "github.com/powerpuffpenguin/goja_go/stdgo/crypto/ecdsa"
 
-	// crypto_ecdsa"github.com/powerpuffpenguin/goja_go/stdgo/crypto/ecdsa"
 	// crypto_ed25519"github.com/powerpuffpenguin/goja_go/stdgo/crypto/ed25519"
 	// crypto_elliptic"github.com/powerpuffpenguin/goja_go/stdgo/crypto/elliptic"
 	// crypto_hmac"github.com/powerpuffpenguin/goja_go/stdgo/crypto/hmac"
@@ -121,7 +121,7 @@ var modules = []module{
 	{crypto_cipher.ModuleID, crypto_cipher.Require},
 	{crypto_des.ModuleID, crypto_des.Require},
 	{crypto_dsa.ModuleID, crypto_dsa.Require},
-	// {crypto_ecdsa.ModuleID,crypto_ecdsa.Require},
+	{crypto_ecdsa.ModuleID, crypto_ecdsa.Require},
 	// {crypto_ed25519.ModuleID,crypto_ed25519.Require},
 	// {crypto_elliptic.ModuleID,crypto_elliptic.Require},
 	// {crypto_hmac.ModuleID,crypto_hmac.Require},
