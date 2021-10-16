@@ -37,7 +37,9 @@ The following js environment supports the go standard library:
    * ~~tls~~
    * ~~x509~~
       * ~~pkix~~
-* ~~database~~
+* database
+   * sql
+      * driver
 * ~~debug~~
 * ~~embed~~
 * encoding

@@ -14,16 +14,29 @@
 /// <reference path="bytes.d.ts" />
 /// <reference path="context.d.ts" />
 
-    // / <reference path="crypto.d.ts" />
-    // / <reference path="crypto/aes.d.ts" />
-    // / <reference path="crypto/cipher.d.ts" />
-    // / <reference path="crypto/des.d.ts" />
-    // / <reference path="crypto/dsa.d.ts" />
-    // / <reference path="crypto/ecdsa.d.ts" />
-    // / <reference path="crypto/ed25519.d.ts" />
-    // / <reference path="crypto/elliptic.d.ts" />
-    // / <reference path="crypto/hmac.d.ts" />
-    // / <reference path="crypto/md5.d.ts" />
+/// <reference path="crypto.d.ts" />
+/// <reference path="crypto/aes.d.ts" />
+/// <reference path="crypto/cipher.d.ts" />
+    /// <reference path="crypto/des.d.ts" />
+    /// <reference path="crypto/dsa.d.ts" />
+    /// <reference path="crypto/ecdsa.d.ts" />
+    /// <reference path="crypto/ed25519.d.ts" />
+    /// <reference path="crypto/elliptic.d.ts" />
+    /// <reference path="crypto/hmac.d.ts" />
+    /// <reference path="crypto/md5.d.ts" />
+    /// <reference path="crypto/rand.d.ts" />
+    /// <reference path="crypto/rc4.d.ts" />
+    /// <reference path="crypto/rsa.d.ts" />
+    /// <reference path="crypto/sha1.d.ts" />
+    /// <reference path="crypto/sha256.d.ts" />
+    /// <reference path="crypto/sha512.d.ts" />
+    /// <reference path="crypto/subtle.d.ts" />
+    /// <reference path="crypto/tls.d.ts" />
+    /// <reference path="crypto/x509.d.ts" />
+    /// <reference path="crypto/x509/pkix.d.ts" />
+
+/// <reference path="database/sql.d.ts" />
+/// <reference path="database/sql/driver.d.ts" />
 
 /// <reference path="encoding.d.ts" />
 /// <reference path="encoding/ascii85.d.ts" />
