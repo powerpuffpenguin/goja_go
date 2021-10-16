@@ -20,9 +20,9 @@ import (
 	crypto "github.com/powerpuffpenguin/goja_go/stdgo/crypto"
 	crypto_aes "github.com/powerpuffpenguin/goja_go/stdgo/crypto/aes"
 	crypto_cipher "github.com/powerpuffpenguin/goja_go/stdgo/crypto/cipher"
+	crypto_des "github.com/powerpuffpenguin/goja_go/stdgo/crypto/des"
+	crypto_dsa "github.com/powerpuffpenguin/goja_go/stdgo/crypto/dsa"
 
-	// crypto_des"github.com/powerpuffpenguin/goja_go/stdgo/crypto/des"
-	// crypto_dsa"github.com/powerpuffpenguin/goja_go/stdgo/crypto/dsa"
 	// crypto_ecdsa"github.com/powerpuffpenguin/goja_go/stdgo/crypto/ecdsa"
 	// crypto_ed25519"github.com/powerpuffpenguin/goja_go/stdgo/crypto/ed25519"
 	// crypto_elliptic"github.com/powerpuffpenguin/goja_go/stdgo/crypto/elliptic"
@@ -119,8 +119,8 @@ var modules = []module{
 	{crypto.ModuleID, crypto.Require},
 	{crypto_aes.ModuleID, crypto_aes.Require},
 	{crypto_cipher.ModuleID, crypto_cipher.Require},
-	// {crypto_des.ModuleID,crypto_des.Require},
-	// {crypto_dsa.ModuleID,crypto_dsa.Require},
+	{crypto_des.ModuleID, crypto_des.Require},
+	{crypto_dsa.ModuleID, crypto_dsa.Require},
 	// {crypto_ecdsa.ModuleID,crypto_ecdsa.Require},
 	// {crypto_ed25519.ModuleID,crypto_ed25519.Require},
 	// {crypto_elliptic.ModuleID,crypto_elliptic.Require},
