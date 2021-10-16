@@ -17,6 +17,19 @@ import (
 	bytes "github.com/powerpuffpenguin/goja_go/stdgo/bytes"
 	context "github.com/powerpuffpenguin/goja_go/stdgo/context"
 
+	encoding "github.com/powerpuffpenguin/goja_go/stdgo/encoding"
+	encoding_ascii85 "github.com/powerpuffpenguin/goja_go/stdgo/encoding/ascii85"
+	encoding_asn1 "github.com/powerpuffpenguin/goja_go/stdgo/encoding/asn1"
+	encoding_base32 "github.com/powerpuffpenguin/goja_go/stdgo/encoding/base32"
+	encoding_base64 "github.com/powerpuffpenguin/goja_go/stdgo/encoding/base64"
+	encoding_binary "github.com/powerpuffpenguin/goja_go/stdgo/encoding/binary"
+	encoding_csv "github.com/powerpuffpenguin/goja_go/stdgo/encoding/csv"
+	encoding_gob "github.com/powerpuffpenguin/goja_go/stdgo/encoding/gob"
+	encoding_hex "github.com/powerpuffpenguin/goja_go/stdgo/encoding/hex"
+	encoding_json "github.com/powerpuffpenguin/goja_go/stdgo/encoding/json"
+	encoding_pem "github.com/powerpuffpenguin/goja_go/stdgo/encoding/pem"
+	encoding_xml "github.com/powerpuffpenguin/goja_go/stdgo/encoding/xml"
+	
 	errors "github.com/powerpuffpenguin/goja_go/stdgo/errors"
 
 	fmt "github.com/powerpuffpenguin/goja_go/stdgo/fmt"
@@ -78,6 +91,19 @@ var modules = []module{
 	{bytes.ModuleID, bytes.Require},
 	{context.ModuleID, context.Require},
 
+	{encoding.ModuleID, encoding.Require},
+	{encoding_ascii85.ModuleID, encoding_ascii85.Require},
+	{encoding_asn1.ModuleID, encoding_asn1.Require},
+	{encoding_base32.ModuleID, encoding_base32.Require},
+	{encoding_base64.ModuleID, encoding_base64.Require},
+	{encoding_binary.ModuleID, encoding_binary.Require},
+	{encoding_csv.ModuleID, encoding_csv.Require},
+	{encoding_gob.ModuleID, encoding_gob.Require},
+	{encoding_hex.ModuleID, encoding_hex.Require},
+	{encoding_json.ModuleID, encoding_json.Require},
+	{encoding_pem.ModuleID, encoding_pem.Require},
+	{encoding_xml.ModuleID, encoding_xml.Require},
+	
 	{errors.ModuleID, errors.Require},
 
 	{fmt.ModuleID, fmt.Require},
@@ -96,7 +122,7 @@ var modules = []module{
 	{image_gif.ModuleID, image_gif.Require},
 	{image_jpeg.ModuleID, image_jpeg.Require},
 	{image_png.ModuleID, image_png.Require},
-	
+
 	{index_suffixarray.ModuleID, index_suffixarray.Require},
 
 	{io.ModuleID, io.Require},

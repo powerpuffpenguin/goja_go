@@ -40,7 +40,18 @@ The following js environment supports the go standard library:
 * ~~database~~
 * ~~debug~~
 * ~~embed~~
-* ~~encoding~~
+* encoding
+   * ascii85
+   * asn1
+   * base32
+   * base64
+   * binary
+   * csv
+   * gob
+   * hex
+   * json
+   * pem
+   * xml
 * errors
 * ~~expvar~~
 * ~~flag~~

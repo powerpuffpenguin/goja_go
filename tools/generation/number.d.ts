@@ -5,6 +5,9 @@ declare module "stdgo/builtin" {
     interface Type {
         readonly __Type: Type
     }
+    interface Value {
+        readonly __Value: Value
+    }
     interface Uintptr extends Native {
         readonly __Uintptr: Uintptr
     }
@@ -32,8 +35,8 @@ declare module "stdgo/builtin" {
 
     function print(...args: Array<any>): void
     function printType(...args: Array<any>): void
-    function async<T>(f: () => T): Promise<T>
-    function error(f: () => Error): Error
+    function async<T>(f: T, ...args: Parameters<T>): Promise<ReturnType<T>>
+    function error<T>(f: T, ...args: Parameters<T>): Error
 
     function append<T>(slice: Slice<T>, ...elems: Array<T>): Slice<T>
     function cap<T>(slice: Slice<T>): Int
@@ -784,4 +787,11 @@ declare module "stdgo/builtin" {
     type Runes = Int32Slice
     type Byte = Uint8
     type Bytes = Uint8Slice
+
+    interface Complex128 extends Native {
+        readonly __Complex128: Complex128
+    }
+    interface Complex64 extends Native {
+        readonly __Complex64: Complex64
+    }
 }

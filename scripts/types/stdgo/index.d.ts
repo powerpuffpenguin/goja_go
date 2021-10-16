@@ -25,6 +25,19 @@
     // / <reference path="crypto/hmac.d.ts" />
     // / <reference path="crypto/md5.d.ts" />
 
+/// <reference path="encoding.d.ts" />
+/// <reference path="encoding/ascii85.d.ts" />
+/// <reference path="encoding/asn1.d.ts" />
+/// <reference path="encoding/base32.d.ts" />
+/// <reference path="encoding/base64.d.ts" />
+/// <reference path="encoding/binary.d.ts" />
+/// <reference path="encoding/csv.d.ts" />
+/// <reference path="encoding/gob.d.ts" />
+/// <reference path="encoding/hex.d.ts" />
+/// <reference path="encoding/json.d.ts" />
+/// <reference path="encoding/pem.d.ts" />
+/// <reference path="encoding/xml.d.ts" />
+
 /// <reference path="errors.d.ts" />
 
 /// <reference path="fmt.d.ts" />

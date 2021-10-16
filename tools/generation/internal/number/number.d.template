@@ -5,6 +5,9 @@ declare module "stdgo/builtin" {
     interface Type {
         readonly __Type: Type
     }
+    interface Value {
+        readonly __Value: Value
+    }
     interface Uintptr extends Native {
         readonly __Uintptr: Uintptr
     }
