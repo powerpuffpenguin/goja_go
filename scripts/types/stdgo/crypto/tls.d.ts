@@ -383,6 +383,14 @@ declare module "stdgo/crypto/tls" {
         Clone(): Config
         SetSessionTicketKeys(keys: Slice<Slice<Byte>>): void
     }
+
+    function Client(conn: net.Conn, config: ConfigPointer): ConnPointer
+    function Dial(network: string, addr: string, config: ConfigPointer): ConnPointer
+    function DialWithDialer(dialer: net.DialerPointer, network: string, addr: string, config: ConfigPointer): ConnPointer
+    function Server(conn: net.Conn, config: ConfigPointer): ConnPointer
+    interface ConnPointer extends Native {
+        // contains filtered or unexported fields
+    }
     interface ConnectionState extends Native {
         readonly __ConnectionState: ConnectionState
         // Version is the TLS version used by the connection (e.g. VersionTLS12).
@@ -532,6 +540,7 @@ declare module "stdgo/crypto/tls" {
     function isClientHelloInfoPointer(v: any): v is ClientHelloInfoPointer
     function isClientSessionStatePointer(v: any): v is ClientSessionStatePointer
     function isConfigPointer(v: any): v is ConfigPointer
+    function isConnPointer(v: any): v is ConnPointer
     function isConnectionState(v: any): v is ConnectionState
     function isCurveID(v: any): v is CurveID
     function isDialerPointer(v: any): v is DialerPointer

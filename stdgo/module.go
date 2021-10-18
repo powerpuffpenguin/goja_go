@@ -85,6 +85,7 @@ import (
 	math_cmplx "github.com/powerpuffpenguin/goja_go/stdgo/math/cmplx"
 
 	net "github.com/powerpuffpenguin/goja_go/stdgo/net"
+	net_http "github.com/powerpuffpenguin/goja_go/stdgo/net/http"
 	net_url "github.com/powerpuffpenguin/goja_go/stdgo/net/url"
 
 	os "github.com/powerpuffpenguin/goja_go/stdgo/os"
@@ -183,6 +184,7 @@ var modules = []module{
 	{math_cmplx.ModuleID, math_cmplx.Require},
 
 	{net.ModuleID, net.Require},
+	{net_http.ModuleID, net_http.Require},
 	{net_url.ModuleID, net_url.Require},
 
 	{os.ModuleID, os.Require},

@@ -40,11 +40,19 @@ declare module "stdgo/builtin" {
 
     function append<T>(slice: Slice<T>, ...elems: Array<T>): Slice<T>
     function cap<T>(slice: Slice<T>): Int
-    function len<T>(slice: Slice<T>): Int
+    function len<T>(slice: Slice<T> | Map): Int
     function copy<T>(dst: Slice<T>, src: Slice<T>): Int
     function getIndex<T>(slice: Slice<T>, index: NumberLike): T
     function setIndex<T>(slice: Slice<T>, index: NumberLike, x: T): void
     function slice<T>(slice: Slice<T>, i?: NumberLike, j?: NumberLike, k?: NumberLike): Slice<T>
+    function append<T>(slice: Array<T>, ...elems: Array<T>): Slice<T>
+    function cap<T>(slice: Array<T>): Int
+    function len<T>(slice: Array<T>): Int
+    function copy<T>(dst: Array<T>, src: Array<T>): Int
+    function getIndex<T>(slice: Array<T>, index: NumberLike): T
+    function setIndex<T>(slice: Array<T>, index: NumberLike, x: T): void
+    function slice<T>(slice: Array<T>, i?: NumberLike, j?: NumberLike, k?: NumberLike): Slice<T>
+    
     function getKey<K, V>(m: Map<K, V>, key: K): [V, boolean]
     function setKey<K, V>(m: Map<K, V>, key: K, elem: V): void
     function deleteKey<K, V>(m: Map<K, V>, key: K): void

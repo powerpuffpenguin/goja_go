@@ -60,6 +60,10 @@ func (f *factory) register() {
 	f.Accessor(`RequireAndVerifyClientCert`, f.getRequireAndVerifyClientCert, nil)
 	f.Set(`NewLRUClientSessionCache`, tls.NewLRUClientSessionCache)
 	f.Set(`Config`, Config)
+	f.Set(`Client`, tls.Client)
+	f.Set(`Dial`, tls.Dial)
+	f.Set(`DialWithDialer`, tls.DialWithDialer)
+	f.Set(`Server`, tls.Server)
 	f.Set(`CurveID`, CurveID)
 	f.Accessor(`CurveP256`, f.getCurveP256, nil)
 	f.Accessor(`CurveP384`, f.getCurveP384, nil)
@@ -92,6 +96,7 @@ func (f *factory) register() {
 	f.Set(`isClientHelloInfoPointer`, isClientHelloInfoPointer)
 	f.Set(`isClientSessionStatePointer`, isClientSessionStatePointer)
 	f.Set(`isConfigPointer`, isConfigPointer)
+	f.Set(`isConnPointer`, isConnPointer)
 	f.Set(`isConnectionState`, isConnectionState)
 	f.Set(`isCurveID`, isCurveID)
 	f.Set(`isDialerPointer`, isDialerPointer)
@@ -234,6 +239,11 @@ func isConfigPointer(i interface{}) bool {
 	_, result := i.(*tls.Config)
 	return result
 }
+func isConnPointer(i interface{}) bool {
+	_, result := i.(*tls.Conn)
+	return result
+}
+
 func isConnectionState(i interface{}) bool {
 	_, result := i.(tls.ConnectionState)
 	return result

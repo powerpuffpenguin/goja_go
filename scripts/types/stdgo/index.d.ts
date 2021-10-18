@@ -83,6 +83,7 @@
 /// <reference path="math/rand.d.ts" />
 
 /// <reference path="net.d.ts" />
+/// <reference path="net/http.d.ts" />
 /// <reference path="net/url.d.ts" />
 
 /// <reference path="os.d.ts" />
