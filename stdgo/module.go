@@ -23,21 +23,20 @@ import (
 	crypto_des "github.com/powerpuffpenguin/goja_go/stdgo/crypto/des"
 	crypto_dsa "github.com/powerpuffpenguin/goja_go/stdgo/crypto/dsa"
 	crypto_ecdsa "github.com/powerpuffpenguin/goja_go/stdgo/crypto/ecdsa"
-
-	// crypto_ed25519"github.com/powerpuffpenguin/goja_go/stdgo/crypto/ed25519"
-	// crypto_elliptic"github.com/powerpuffpenguin/goja_go/stdgo/crypto/elliptic"
-	// crypto_hmac"github.com/powerpuffpenguin/goja_go/stdgo/crypto/hmac"
-	// crypto_md5"github.com/powerpuffpenguin/goja_go/stdgo/crypto/md5"
-	// crypto_rand"github.com/powerpuffpenguin/goja_go/stdgo/crypto/rand"
-	// crypto_rc4"github.com/powerpuffpenguin/goja_go/stdgo/crypto/rc4"
-	// crypto_rsa"github.com/powerpuffpenguin/goja_go/stdgo/crypto/rsa"
-	// crypto_sha1"github.com/powerpuffpenguin/goja_go/stdgo/crypto/sha1"
-	// crypto_sha256"github.com/powerpuffpenguin/goja_go/stdgo/crypto/sha256"
-	// crypto_sha512"github.com/powerpuffpenguin/goja_go/stdgo/crypto/sha512"
-	// crypto_subtle"github.com/powerpuffpenguin/goja_go/stdgo/crypto/subtle"
-	// crypto_tls"github.com/powerpuffpenguin/goja_go/stdgo/crypto/tls"
-	// crypto_x509"github.com/powerpuffpenguin/goja_go/stdgo/crypto/x509"
-	// crypto_x509_pkix"github.com/powerpuffpenguin/goja_go/stdgo/crypto/x509/pkix"
+	crypto_ed25519 "github.com/powerpuffpenguin/goja_go/stdgo/crypto/ed25519"
+	crypto_elliptic "github.com/powerpuffpenguin/goja_go/stdgo/crypto/elliptic"
+	crypto_hmac "github.com/powerpuffpenguin/goja_go/stdgo/crypto/hmac"
+	crypto_md5 "github.com/powerpuffpenguin/goja_go/stdgo/crypto/md5"
+	crypto_rand "github.com/powerpuffpenguin/goja_go/stdgo/crypto/rand"
+	crypto_rc4 "github.com/powerpuffpenguin/goja_go/stdgo/crypto/rc4"
+	crypto_rsa "github.com/powerpuffpenguin/goja_go/stdgo/crypto/rsa"
+	crypto_sha1 "github.com/powerpuffpenguin/goja_go/stdgo/crypto/sha1"
+	crypto_sha256 "github.com/powerpuffpenguin/goja_go/stdgo/crypto/sha256"
+	crypto_sha512 "github.com/powerpuffpenguin/goja_go/stdgo/crypto/sha512"
+	crypto_subtle "github.com/powerpuffpenguin/goja_go/stdgo/crypto/subtle"
+	crypto_tls "github.com/powerpuffpenguin/goja_go/stdgo/crypto/tls"
+	crypto_x509 "github.com/powerpuffpenguin/goja_go/stdgo/crypto/x509"
+	crypto_x509_pkix "github.com/powerpuffpenguin/goja_go/stdgo/crypto/x509/pkix"
 
 	database_sql "github.com/powerpuffpenguin/goja_go/stdgo/database/sql"
 	database_sql_driver "github.com/powerpuffpenguin/goja_go/stdgo/database/sql/driver"
@@ -122,20 +121,20 @@ var modules = []module{
 	{crypto_des.ModuleID, crypto_des.Require},
 	{crypto_dsa.ModuleID, crypto_dsa.Require},
 	{crypto_ecdsa.ModuleID, crypto_ecdsa.Require},
-	// {crypto_ed25519.ModuleID,crypto_ed25519.Require},
-	// {crypto_elliptic.ModuleID,crypto_elliptic.Require},
-	// {crypto_hmac.ModuleID,crypto_hmac.Require},
-	// {crypto_md5.ModuleID,crypto_md5.Require},
-	// {crypto_rand.ModuleID,crypto_rand.Require},
-	// {crypto_rc4.ModuleID,crypto_rc4.Require},
-	// {crypto_rsa.ModuleID,crypto_rsa.Require},
-	// {crypto_sha1.ModuleID,crypto_sha1.Require},
-	// {crypto_sha256.ModuleID,crypto_sha256.Require},
-	// {crypto_sha512.ModuleID,crypto_sha512.Require},
-	// {crypto_subtle.ModuleID,crypto_subtle.Require},
-	// {crypto_tls.ModuleID,crypto_tls.Require},
-	// {crypto_x509.ModuleID,crypto_x509.Require},
-	// {crypto_x509_pkix.ModuleID,crypto_x509_pkix.Require},
+	{crypto_ed25519.ModuleID, crypto_ed25519.Require},
+	{crypto_elliptic.ModuleID, crypto_elliptic.Require},
+	{crypto_hmac.ModuleID, crypto_hmac.Require},
+	{crypto_md5.ModuleID, crypto_md5.Require},
+	{crypto_rand.ModuleID, crypto_rand.Require},
+	{crypto_rc4.ModuleID, crypto_rc4.Require},
+	{crypto_rsa.ModuleID, crypto_rsa.Require},
+	{crypto_sha1.ModuleID, crypto_sha1.Require},
+	{crypto_sha256.ModuleID, crypto_sha256.Require},
+	{crypto_sha512.ModuleID, crypto_sha512.Require},
+	{crypto_subtle.ModuleID, crypto_subtle.Require},
+	{crypto_tls.ModuleID, crypto_tls.Require},
+	{crypto_x509.ModuleID, crypto_x509.Require},
+	{crypto_x509_pkix.ModuleID, crypto_x509_pkix.Require},
 
 	{database_sql_driver.ModuleID, database_sql_driver.Require},
 	{database_sql.ModuleID, database_sql.Require},

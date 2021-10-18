@@ -26,6 +26,8 @@ declare module "stdgo/crypto/ecdsa" {
 
     function GenerateKey(c: elliptic.Curve, rand: io.Reader): PrivateKeyPointer
     interface PrivateKeyPointer extends PublicKeyPointer {
+        readonly __PrivateKeyPointer: PrivateKeyPointer
+
         PublicKey: PublicKeyPointer
         D: big.IntPointer
 

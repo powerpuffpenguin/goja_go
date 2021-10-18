@@ -17,26 +17,26 @@ The following js environment supports the go standard library:
    * zlib
 * ~~container~~
 * context
-* ~~crypto~~
-   * ~~aes~~
-   * ~~cipher~~
-   * ~~des~~
-   * ~~dsa~~
-   * ~~ecdsa~~
-   * ~~ed25519~~
-   * ~~elliptic~~
-   * ~~hmac~~
-   * ~~md5~~
-   * ~~rand~~
-   * ~~rc4~~
-   * ~~rsa~~
-   * ~~sha1~~
-   * ~~sha256~~
-   * ~~sha512~~
-   * ~~subtle~~
-   * ~~tls~~
-   * ~~x509~~
-      * ~~pkix~~
+* crypto
+   * aes
+   * cipher
+   * des
+   * dsa
+   * ecdsa
+   * ed25519
+   * elliptic
+   * hmac
+   * md5
+   * rand
+   * rc4
+   * rsa
+   * sha1
+   * sha256
+   * sha512
+   * subtle
+   * tls
+   * x509
+      * pkix
 * database
    * sql
       * driver
