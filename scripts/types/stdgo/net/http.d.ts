@@ -15,12 +15,142 @@ declare module "stdgo/net/http" {
     } from "stdgo/builtin";
     import * as context from "stdgo/context";
     import * as time from "stdgo/time";
+    import * as fmt from "stdgo/fmt";
     import * as bufio from "stdgo/bufio";
     import * as io from "stdgo/io";
     import * as fs from "stdgo/io/fs";
     import * as url from "stdgo/net/url";
     import * as tls from "stdgo/crypto/tls";
     import * as multipart from "stdgo/mime/multipart"
+
+    const MethodGet = "GET"
+    const MethodHead = "HEAD"
+    const MethodPost = "POST"
+    const MethodPut = "PUT"
+    const MethodPatch = "PATCH" // RFC 5789
+    const MethodDelete = "DELETE"
+    const MethodConnect = "CONNECT"
+    const MethodOptions = "OPTIONS"
+    const MethodTrace = "TRACE"
+
+    const StatusContinue = Int(100) // RFC 7231, 6.2.1
+    const StatusSwitchingProtocols = Int(101) // RFC 7231, 6.2.2
+    const StatusProcessing = Int(102) // RFC 2518, 10.1
+    const StatusEarlyHints = Int(103) // RFC 8297
+    const StatusOK = Int(200) // RFC 7231, 6.3.1
+    const StatusCreated = Int(201) // RFC 7231, 6.3.2
+    const StatusAccepted = Int(202) // RFC 7231, 6.3.3
+    const StatusNonAuthoritativeInfo = Int(203) // RFC 7231, 6.3.4
+    const StatusNoContent = Int(204) // RFC 7231, 6.3.5
+    const StatusResetContent = Int(205) // RFC 7231, 6.3.6
+    const StatusPartialContent = Int(206) // RFC 7233, 4.1
+    const StatusMultiStatus = Int(207) // RFC 4918, 11.1
+    const StatusAlreadyReported = Int(208) // RFC 5842, 7.1
+    const StatusIMUsed = Int(226) // RFC 3229, 10.4.1
+    const StatusMultipleChoices = Int(300) // RFC 7231, 6.4.1
+    const StatusMovedPermanently = Int(301) // RFC 7231, 6.4.2
+    const StatusFound = Int(302) // RFC 7231, 6.4.3
+    const StatusSeeOther = Int(303) // RFC 7231, 6.4.4
+    const StatusNotModified = Int(304) // RFC 7232, 4.1
+    const StatusUseProxy = Int(305) // RFC 7231, 6.4.5
+    const StatusTemporaryRedirect = Int(307) // RFC 7231, 6.4.7
+    const StatusPermanentRedirect = Int(308) // RFC 7538, 3
+    const StatusBadRequest = Int(400) // RFC 7231, 6.5.1
+    const StatusUnauthorized = Int(401) // RFC 7235, 3.1
+    const StatusPaymentRequired = Int(402) // RFC 7231, 6.5.2
+    const StatusForbidden = Int(403) // RFC 7231, 6.5.3
+    const StatusNotFound = Int(404) // RFC 7231, 6.5.4
+    const StatusMethodNotAllowed = Int(405) // RFC 7231, 6.5.5
+    const StatusNotAcceptable = Int(406) // RFC 7231, 6.5.6
+    const StatusProxyAuthRequired = Int(407) // RFC 7235, 3.2
+    const StatusRequestTimeout = Int(408) // RFC 7231, 6.5.7
+    const StatusConflict = Int(409) // RFC 7231, 6.5.8
+    const StatusGone = Int(410) // RFC 7231, 6.5.9
+    const StatusLengthRequired = Int(411) // RFC 7231, 6.5.10
+    const StatusPreconditionFailed = Int(412) // RFC 7232, 4.2
+    const StatusRequestEntityTooLarge = Int(413) // RFC 7231, 6.5.11
+    const StatusRequestURITooLong = Int(414) // RFC 7231, 6.5.12
+    const StatusUnsupportedMediaType = Int(415) // RFC 7231, 6.5.13
+    const StatusRequestedRangeNotSatisfiable = Int(416) // RFC 7233, 4.4
+    const StatusExpectationFailed = Int(417) // RFC 7231, 6.5.14
+    const StatusTeapot = Int(418) // RFC 7168, 2.3.3
+    const StatusMisdirectedRequest = Int(421) // RFC 7540, 9.1.2
+    const StatusUnprocessableEntity = Int(422) // RFC 4918, 11.2
+    const StatusLocked = Int(423) // RFC 4918, 11.3
+    const StatusFailedDependency = Int(424) // RFC 4918, 11.4
+    const StatusTooEarly = Int(425) // RFC 8470, 5.2.
+    const StatusUpgradeRequired = Int(426) // RFC 7231, 6.5.15
+    const StatusPreconditionRequired = Int(428) // RFC 6585, 3
+    const StatusTooManyRequests = Int(429) // RFC 6585, 4
+    const StatusRequestHeaderFieldsTooLarge = Int(431) // RFC 6585, 5
+    const StatusUnavailableForLegalReasons = Int(451) // RFC 7725, 3
+    const StatusInternalServerError = Int(500) // RFC 7231, 6.6.1
+    const StatusNotImplemented = Int(501) // RFC 7231, 6.6.2
+    const StatusBadGateway = Int(502) // RFC 7231, 6.6.3
+    const StatusServiceUnavailable = Int(503) // RFC 7231, 6.6.4
+    const StatusGatewayTimeout = Int(504) // RFC 7231, 6.6.5
+    const StatusHTTPVersionNotSupported = Int(505) // RFC 7231, 6.6.6
+    const StatusVariantAlsoNegotiates = Int(506) // RFC 2295, 8.1
+    const StatusInsufficientStorage = Int(507) // RFC 4918, 11.5
+    const StatusLoopDetected = Int(508) // RFC 5842, 7.2
+    const StatusNotExtended = Int(510) // RFC 2774, 7
+    const StatusNetworkAuthenticationRequired = Int(511) // RFC 6585, 6
+
+    const DefaultMaxHeaderBytes = Int(1 << 20) // 1 MB
+    const DefaultMaxIdleConnsPerHost = Int(2)
+    const TimeFormat = "Mon, 02 Jan 2006 15:04:05 GMT"
+    const TrailerPrefix = "Trailer:"
+
+    const ErrNotSupported: Error
+    const ErrMissingBoundary: Error
+    const ErrNotMultipart: Error
+    const ErrHeaderTooLong: Error
+    const ErrShortBody: Error
+    const ErrMissingContentLength: Error
+    const ErrBodyNotAllowed: Error
+    const ErrHijacked: Error
+    const ErrContentLength: Error
+    const ErrWriteAfterFlush: Error
+
+    const ServerContextKey: fmt.Stringer
+    const LocalAddrContextKey: fmt.Stringer
+
+    const DefaultClient: ClientPointer
+    const DefaultServeMux: ServeMuxPointer
+    const ErrAbortHandler: Error
+    const ErrBodyReadAfterClose: Error
+    const ErrHandlerTimeout: Error
+    const ErrLineTooLong: Error
+    const ErrMissingFile: Error
+    const ErrNoCookie: Error
+    const ErrNoLocation: Error
+    const ErrServerClosed: Error
+    const ErrSkipAltProtocol: Error
+    const ErrUseLastResponse: Error
+    const NoBody: noBody
+    interface noBody extends io.ReadCloser, io.WriterTo { }
+
+    function CanonicalHeaderKey(s: string): string
+    function DetectContentType(data: Bytes): string
+    function Error(w: ResponseWriter, error: string, code: Int | NumberLike): void
+    function Handle(pattern: string, handler: Handler): void
+    function HandleFunc(pattern: string, handler: (w: ResponseWriter, r: RequestPointer) => void): void
+    function ListenAndServe(addr: string, handler: Handler): void
+    function ListenAndServeTLS(addr: string, certFile: string, keyFile: string, handler: Handler): void
+    function MaxBytesReader(w: ResponseWriter, r: io.ReadCloser, n: Int64 | NumberLike): io.ReadCloser
+    function NotFound(w: ResponseWriter, r: RequestPointer): void
+    /** return (major, minor int, ok bool) */
+    function ParseHTTPVersion(vers: string): [Int, Int, boolean]
+    function ParseTime(text: string): time.Time
+    function ProxyFromEnvironment(req: RequestPointer): url.URLPointer
+    function ProxyURL(fixedURL: url.URLPointer): (r: RequestPointer) => [url.URLPointer, Error]
+    function Redirect(w: ResponseWriter, r: RequestPointer, url: string, code: Int | NumberLike): void
+    function Serve(l: net.Listener, handler: Handler): void
+    function ServeContent(w: ResponseWriter, req: RequestPointer, name: string, modtime: time.Time, content: io.ReadSeeker): void
+    function ServeFile(w: ResponseWriter, r: RequestPointer, name: string): void
+    function ServeTLS(l: net.Listener, handler: Handler, certFile: string, keyFile: string): void
+    function SetCookie(w: ResponseWriter, cookie: CookiePointer): void
+    function StatusText(code: Int | NumberLike): string
 
     function Client(): ClientPointer
     interface ClientPointer extends Native {
@@ -152,6 +282,7 @@ declare module "stdgo/net/http" {
     function RedirectHandler(url: string, code: Int | NumberLike): Handler
     function StripPrefix(prefix: string, h: Handler): Handler
     function TimeoutHandler(h: Handler, dt: time.Duration, msg: string): Handler
+    function Handler(f: (w: ResponseWriter, r: RequestPointer) => void | Promise<any>): Handler
     interface Handler extends Native {
         ServeHTTP(w: ResponseWriter, req: RequestPointer): void
     }
@@ -668,7 +799,9 @@ declare module "stdgo/net/http" {
         Handler(r: RequestPointer): [Handler, string]
     }
 
+    function Server(): ServerPointer
     interface ServerPointer extends Native {
+        readonly __ServerPointer: ServerPointer
         // Addr optionally specifies the TCP address for the server to listen on,
         // in the form "host:port". If empty, ":http" (port 80) is used.
         // The service names are defined in RFC 6335 and assigned by IANA.
@@ -733,18 +866,18 @@ declare module "stdgo/net/http" {
         // automatically closed when the function returns.
         // If TLSNextProto is not nil, HTTP/2 support is not enabled
         // automatically.
-        TLSNextProto: Map<string, (s: ServerPointer, conn: tls.ConnPoint, h: Handler) => void>
+        TLSNextProto: Map<string, (s: ServerPointer, conn: tls.ConnPointer, h: Handler) => void>
 
-            // ConnState specifies an optional callback function that is
-            // called when a client connection changes state. See the
-            // ConnState type and associated constants for details.
-            ConnState func(net.Conn, ConnState)
+        // ConnState specifies an optional callback function that is
+        // called when a client connection changes state. See the
+        // ConnState type and associated constants for details.
+        ConnState: (c: net.Conn, s: ConnState) => void
 
-    // ErrorLog specifies an optional logger for errors accepting
-    // connections, unexpected behavior from handlers, and
-    // underlying FileSystem errors.
-    // If nil, logging is done via the log package's standard logger.
-    ErrorLog * log.Logger
+        // ErrorLog specifies an optional logger for errors accepting
+        // connections, unexpected behavior from handlers, and
+        // underlying FileSystem errors.
+        // If nil, logging is done via the log package's standard logger.
+        ErrorLog: log.Logger
 
         // BaseContext optionally specifies a function that returns
         // the base context for incoming requests on this server.
@@ -752,33 +885,213 @@ declare module "stdgo/net/http" {
         // about to start accepting requests.
         // If BaseContext is nil, the default is context.Background().
         // If non-nil, it must return a non-nil context.
-        BaseContext func(net.Listener) context.Context
+        BaseContext: (l: net.Listener) => context.Context
 
         // ConnContext optionally specifies a function that modifies
         // the context used for a new connection c. The provided ctx
         // is derived from the base context and has a ServerContextKey
         // value.
-        ConnContext func(ctx context.Context, c net.Conn) context.Context
-    // contains filtered or unexported fields
-}
-    // ClientPointer
-    // ConnState
-    // CookiePointer
-    // Dir
-    // File
-    // FileSystem
-    // Flusher
-    // Handler
-    // HandlerFunc
-    // Header
-    // Hijacker
-    // PushOptionsPointer
-    // Pusher
-    // RequestPointer
-    // ResponsePointer
-    // ResponseWriter
-    // RoundTripper
-    // SameSite
-    // ServeMuxPointer
-    // ServerPointer
+        ConnContext: (ctx: context.Context, c: net.Conn) => context.Context
+        // contains filtered or unexported fields
+
+        Close(): void
+        ListenAndServe(): void
+        ListenAndServeTLS(certFile: string, keyFile: string): void
+        RegisterOnShutdown(f: () => void): void
+        Serve(l: net.Listener): void
+        ServeTLS(l: net.Listener, certFile: string, keyFile: string): void
+        SetKeepAlivesEnabled(v: boolean): void
+        Shutdown(ctx: context.Context): void
+    }
+    function Transport(): TransportPointer
+    interface TransportPointer extends Native {
+        readonly __TransportPointer: TransportPointer
+        // Proxy specifies a function to return a proxy for a given
+        // Request. If the function returns a non-nil error, the
+        // request is aborted with the provided error.
+        //
+        // The proxy type is determined by the URL scheme. "http",
+        // "https", and "socks5" are supported. If the scheme is empty,
+        // "http" is assumed.
+        //
+        // If Proxy is nil or returns a nil *URL, no proxy is used.
+        Proxy: (r: RequestPointer) => [url.URLPointer, Error]
+
+        // DialContext specifies the dial function for creating unencrypted TCP connections.
+        // If DialContext is nil (and the deprecated Dial below is also nil),
+        // then the transport dials using package net.
+        //
+        // DialContext runs concurrently with calls to RoundTrip.
+        // A RoundTrip call that initiates a dial may end up using
+        // a connection dialed previously when the earlier connection
+        // becomes idle before the later DialContext completes.
+        DialContext: (ctx: context.Context, network: string, addr: string) => [net.Conn, Error]
+
+        // Dial specifies the dial function for creating unencrypted TCP connections.
+        //
+        // Dial runs concurrently with calls to RoundTrip.
+        // A RoundTrip call that initiates a dial may end up using
+        // a connection dialed previously when the earlier connection
+        // becomes idle before the later Dial completes.
+        //
+        // Deprecated: Use DialContext instead, which allows the transport
+        // to cancel dials as soon as they are no longer needed.
+        // If both are set, DialContext takes priority.
+        Dial: (network: string, addr: string) => [net.Conn, Error]
+
+        // DialTLSContext specifies an optional dial function for creating
+        // TLS connections for non-proxied HTTPS requests.
+        //
+        // If DialTLSContext is nil (and the deprecated DialTLS below is also nil),
+        // DialContext and TLSClientConfig are used.
+        //
+        // If DialTLSContext is set, the Dial and DialContext hooks are not used for HTTPS
+        // requests and the TLSClientConfig and TLSHandshakeTimeout
+        // are ignored. The returned net.Conn is assumed to already be
+        // past the TLS handshake.
+        DialTLSContext: (ctx: context.Context, network: string, addr: string) => [net.Conn, Error]
+
+        // DialTLS specifies an optional dial function for creating
+        // TLS connections for non-proxied HTTPS requests.
+        //
+        // Deprecated: Use DialTLSContext instead, which allows the transport
+        // to cancel dials as soon as they are no longer needed.
+        // If both are set, DialTLSContext takes priority.
+        DialTLS: (network: string, addr: string) => [net.Conn, Error]
+
+        // TLSClientConfig specifies the TLS configuration to use with
+        // tls.Client.
+        // If nil, the default configuration is used.
+        // If non-nil, HTTP/2 support may not be enabled by default.
+        TLSClientConfig: tls.ConfigPointer
+
+        // TLSHandshakeTimeout specifies the maximum amount of time waiting to
+        // wait for a TLS handshake. Zero means no timeout.
+        TLSHandshakeTimeout: time.Duration
+
+        // DisableKeepAlives, if true, disables HTTP keep-alives and
+        // will only use the connection to the server for a single
+        // HTTP request.
+        //
+        // This is unrelated to the similarly named TCP keep-alives.
+        DisableKeepAlives: boolean
+
+        // DisableCompression, if true, prevents the Transport from
+        // requesting compression with an "Accept-Encoding: gzip"
+        // request header when the Request contains no existing
+        // Accept-Encoding value. If the Transport requests gzip on
+        // its own and gets a gzipped response, it's transparently
+        // decoded in the Response.Body. However, if the user
+        // explicitly requested gzip it is not automatically
+        // uncompressed.
+        DisableCompression: boolean
+
+        // MaxIdleConns controls the maximum number of idle (keep-alive)
+        // connections across all hosts. Zero means no limit.
+        MaxIdleConns: Int
+
+        // MaxIdleConnsPerHost, if non-zero, controls the maximum idle
+        // (keep-alive) connections to keep per-host. If zero,
+        // DefaultMaxIdleConnsPerHost is used.
+        MaxIdleConnsPerHost: Int
+
+        // MaxConnsPerHost optionally limits the total number of
+        // connections per host, including connections in the dialing,
+        // active, and idle states. On limit violation, dials will block.
+        //
+        // Zero means no limit.
+        MaxConnsPerHost; Int
+
+        // IdleConnTimeout is the maximum amount of time an idle
+        // (keep-alive) connection will remain idle before closing
+        // itself.
+        // Zero means no limit.
+        IdleConnTimeout: time.Duration
+
+        // ResponseHeaderTimeout, if non-zero, specifies the amount of
+        // time to wait for a server's response headers after fully
+        // writing the request (including its body, if any). This
+        // time does not include the time to read the response body.
+        ResponseHeaderTimeout: time.Duration
+
+        // ExpectContinueTimeout, if non-zero, specifies the amount of
+        // time to wait for a server's first response headers after fully
+        // writing the request headers if the request has an
+        // "Expect: 100-continue" header. Zero means no timeout and
+        // causes the body to be sent immediately, without
+        // waiting for the server to approve.
+        // This time does not include the time to send the request header.
+        ExpectContinueTimeout: time.Duration
+
+        // TLSNextProto specifies how the Transport switches to an
+        // alternate protocol (such as HTTP/2) after a TLS ALPN
+        // protocol negotiation. If Transport dials an TLS connection
+        // with a non-empty protocol name and TLSNextProto contains a
+        // map entry for that key (such as "h2"), then the func is
+        // called with the request's authority (such as "example.com"
+        // or "example.com:1234") and the TLS connection. The function
+        // must return a RoundTripper that then handles the request.
+        // If TLSNextProto is not nil, HTTP/2 support is not enabled
+        // automatically.
+        TLSNextProto: Map<string, (authority: string, c: tls.ConnPointer) => RoundTripper>
+
+        // ProxyConnectHeader optionally specifies headers to send to
+        // proxies during CONNECT requests.
+        // To set the header dynamically, see GetProxyConnectHeader.
+        ProxyConnectHeader: Header
+
+        // GetProxyConnectHeader optionally specifies a func to return
+        // headers to send to proxyURL during a CONNECT request to the
+        // ip:port target.
+        // If it returns an error, the Transport's RoundTrip fails with
+        // that error. It can return (nil, nil) to not add headers.
+        // If GetProxyConnectHeader is non-nil, ProxyConnectHeader is
+        // ignored.
+        GetProxyConnectHeader: (ctx: context.Context, proxyURL: url.URLPointer, target: string) => [Header, Error]
+
+        // MaxResponseHeaderBytes specifies a limit on how many
+        // response bytes are allowed in the server's response
+        // header.
+        //
+        // Zero means to use a default limit.
+        MaxResponseHeaderBytes: Int64
+
+        // WriteBufferSize specifies the size of the write buffer used
+        // when writing to the transport.
+        // If zero, a default (currently 4KB) is used.
+        WriteBufferSize: Int
+
+        // ReadBufferSize specifies the size of the read buffer used
+        // when reading from the transport.
+        // If zero, a default (currently 4KB) is used.
+        ReadBufferSize: Int
+
+        // ForceAttemptHTTP2 controls whether HTTP/2 is enabled when a non-zero
+        // Dial, DialTLS, or DialContext func or TLSClientConfig is provided.
+        // By default, use of any those fields conservatively disables HTTP/2.
+        // To use a custom dialer or TLS config and still attempt HTTP/2
+        // upgrades, set this to true.
+        ForceAttemptHTTP2: boolean
+        // contains filtered or unexported fields
+    }
+    function isClientPointer(v: any): v is ClientPointer
+    function isConnState(v: any): v is ConnState
+    function isCookiePointer(v: any): v is CookiePointer
+    function isDir(v: any): v is Dir
+    function isFile(v: any): v is File
+    function isFileSystem(v: any): v is FileSystem
+    function isFlusher(v: any): v is Flusher
+    function isHandler(v: any): v is Handler
+    function isHandlerFunc(v: any): v is HandlerFunc
+    function isHeader(v: any): v is Header
+    function isHijacker(v: any): v is Hijacker
+    function isPushOptionsPointer(v: any): v is PushOptionsPointer
+    function isPusher(v: any): v is Pusher
+    function isRequestPointer(v: any): v is RequestPointer
+    function isResponsePointer(v: any): v is ResponsePointer
+    function isResponseWriter(v: any): v is ResponseWriter
+    function isRoundTripper(v: any): v is RoundTripper
+    function isSameSite(v: any): v is SameSite
+    function isServeMuxPointer(v: any): v is ServeMuxPointer
+    function isServerPointer(v: any): v is ServerPointer
 }

@@ -82,6 +82,10 @@
 /// <reference path="math/cmplx.d.ts" />
 /// <reference path="math/rand.d.ts" />
 
+/// <reference path="mime.d.ts" />
+/// <reference path="mime/multipart.d.ts" />
+/// <reference path="mime/quotedprintable.d.ts" />
+
 /// <reference path="net.d.ts" />
 /// <reference path="net/http.d.ts" />
 /// <reference path="net/url.d.ts" />

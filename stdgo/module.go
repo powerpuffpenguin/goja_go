@@ -84,6 +84,10 @@ import (
 	math_bits "github.com/powerpuffpenguin/goja_go/stdgo/math/bits"
 	math_cmplx "github.com/powerpuffpenguin/goja_go/stdgo/math/cmplx"
 
+	mime "github.com/powerpuffpenguin/goja_go/stdgo/mime"
+	mime_multipart "github.com/powerpuffpenguin/goja_go/stdgo/mime/multipart"
+	mime_quotedprintable "github.com/powerpuffpenguin/goja_go/stdgo/mime/quotedprintable"
+
 	net "github.com/powerpuffpenguin/goja_go/stdgo/net"
 	net_http "github.com/powerpuffpenguin/goja_go/stdgo/net/http"
 	net_url "github.com/powerpuffpenguin/goja_go/stdgo/net/url"
@@ -182,6 +186,10 @@ var modules = []module{
 	{math_big.ModuleID, math_big.Require},
 	{math_bits.ModuleID, math_bits.Require},
 	{math_cmplx.ModuleID, math_cmplx.Require},
+
+	{mime.ModuleID, mime.Require},
+	{mime_multipart.ModuleID, mime_multipart.Require},
+	{mime_quotedprintable.ModuleID, mime_quotedprintable.Require},
 
 	{net.ModuleID, net.Require},
 	{net_http.ModuleID, net_http.Require},

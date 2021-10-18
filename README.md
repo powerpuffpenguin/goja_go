@@ -84,8 +84,11 @@ The following js environment supports the go standard library:
    * bits
    * cmplx
    * rand
-* ~~mime~~
+* mime
+   * ~~multipart~~
+   * ~~quotedprintable~~
 * net
+   * http
    * url
 * os
    * exec
