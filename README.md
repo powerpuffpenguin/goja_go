@@ -1,6 +1,6 @@
 # goja_go
 
-some js extensions of github.com/powerpuffpenguin/goja
+some js extensions of [github.com/powerpuffpenguin/goja](https://github.com/powerpuffpenguin/goja)
 
 goja_go imports most of the golang standard library into goja for js call
 
