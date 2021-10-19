@@ -165,6 +165,18 @@ The following js environment supports the go standard library:
 1. The typescript declaration of the js function is located in **scripts/types/stdgo**
 2. The module name in js is the prefix of stdgo + ${go std module name}
 
+# Install Typescript Declaration
+
+```
+yarn add stdgo
+```
+
+or
+
+```
+npm i stdgo
+```
+
 # Example 
 
 Example of calling the go standard library in js
