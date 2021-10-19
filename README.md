@@ -65,7 +65,8 @@ The following js environment supports the go standard library:
    * crc64
    * fnv
    * maphash
-* ~~html~~
+* html
+   * template
 * image
    * color
       * palette
@@ -85,10 +86,13 @@ The following js environment supports the go standard library:
    * cmplx
    * rand
 * mime
-   * ~~multipart~~
-   * ~~quotedprintable~~
+   * multipart
+   * quotedprintable
 * net
    * http
+   * mail
+   * smtp
+   * textproto
    * url
 * os
    * exec
@@ -105,7 +109,10 @@ The following js environment supports the go standard library:
 * ~~sync~~
 * ~~syscall~~
 * ~~testing~~
-* ~~text~~
+* text
+   * scanner
+   * template
+      * parse
 * time
 * ~~unicode~~
 * ~~unsafe~~

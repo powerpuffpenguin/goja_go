@@ -12,5 +12,26 @@ declare module "stdgo/mime/quotedprintable" {
         Slice, Map,
         Uintptr, Native,
     } from "stdgo/builtin";
+    import * as io from "stdgo/io";
 
+    function NewReader(r: io.Reader): ReaderPointer
+    interface ReaderPointer extends Native {
+        readonly __ReaderPointer: ReaderPointer
+        // contains filtered or unexported fields
+        Read(p: Bytes): Int
+    }
+    function NewWriter(w: io.Writer): WriterPointer
+    interface WriterPointer extends Native {
+        readonly __WriterPointer: WriterPointer
+        // Binary mode treats the writer's input as pure binary and processes end of
+        // line bytes as binary data.
+        Binary: boolean
+        // contains filtered or unexported fields
+
+        Close(): void
+        Write(p: Bytes): Int
+    }
+
+    function isReaderPointer(v: any): v is ReaderPointer
+    function isWriterPointer(v: any): v is WriterPointer
 }

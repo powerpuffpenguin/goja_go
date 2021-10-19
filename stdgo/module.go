@@ -65,6 +65,9 @@ import (
 	hash_fnv "github.com/powerpuffpenguin/goja_go/stdgo/hash/fnv"
 	hash_maphash "github.com/powerpuffpenguin/goja_go/stdgo/hash/maphash"
 
+	html "github.com/powerpuffpenguin/goja_go/stdgo/html"
+	html_template "github.com/powerpuffpenguin/goja_go/stdgo/html/template"
+
 	image "github.com/powerpuffpenguin/goja_go/stdgo/image"
 	image_color "github.com/powerpuffpenguin/goja_go/stdgo/image/color"
 	image_color_palette "github.com/powerpuffpenguin/goja_go/stdgo/image/color/palette"
@@ -90,6 +93,9 @@ import (
 
 	net "github.com/powerpuffpenguin/goja_go/stdgo/net"
 	net_http "github.com/powerpuffpenguin/goja_go/stdgo/net/http"
+	net_mail "github.com/powerpuffpenguin/goja_go/stdgo/net/mail"
+	net_smtp "github.com/powerpuffpenguin/goja_go/stdgo/net/smtp"
+	net_textproto "github.com/powerpuffpenguin/goja_go/stdgo/net/textproto"
 	net_url "github.com/powerpuffpenguin/goja_go/stdgo/net/url"
 
 	os "github.com/powerpuffpenguin/goja_go/stdgo/os"
@@ -103,6 +109,10 @@ import (
 	sort "github.com/powerpuffpenguin/goja_go/stdgo/sort"
 	strconv "github.com/powerpuffpenguin/goja_go/stdgo/strconv"
 	strings "github.com/powerpuffpenguin/goja_go/stdgo/strings"
+
+	text_template "github.com/powerpuffpenguin/goja_go/stdgo/text/template"
+	text_template_parse "github.com/powerpuffpenguin/goja_go/stdgo/text/template/parse"
+
 	time "github.com/powerpuffpenguin/goja_go/stdgo/time"
 )
 
@@ -168,6 +178,9 @@ var modules = []module{
 	{hash_fnv.ModuleID, hash_fnv.Require},
 	{hash_maphash.ModuleID, hash_maphash.Require},
 
+	{html.ModuleID, html.Require},
+	{html_template.ModuleID, html_template.Require},
+
 	{image.ModuleID, image.Require},
 	{image_color.ModuleID, image_color.Require},
 	{image_color_palette.ModuleID, image_color_palette.Require},
@@ -193,6 +206,9 @@ var modules = []module{
 
 	{net.ModuleID, net.Require},
 	{net_http.ModuleID, net_http.Require},
+	{net_mail.ModuleID, net_mail.Require},
+	{net_smtp.ModuleID, net_smtp.Require},
+	{net_textproto.ModuleID, net_textproto.Require},
 	{net_url.ModuleID, net_url.Require},
 
 	{os.ModuleID, os.Require},
@@ -206,6 +222,10 @@ var modules = []module{
 	{sort.ModuleID, sort.Require},
 	{strconv.ModuleID, strconv.Require},
 	{strings.ModuleID, strings.Require},
+
+	{text_template.ModuleID, text_template.Require},
+	{text_template_parse.ModuleID, text_template_parse.Require},
+
 	{time.ModuleID, time.Require},
 }
 

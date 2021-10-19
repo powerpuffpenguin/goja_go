@@ -62,6 +62,9 @@
 /// <reference path="hash/fnv.d.ts" />
 /// <reference path="hash/maphash.d.ts" />
 
+/// <reference path="html.d.ts" />
+/// <reference path="html/template.d.ts" />
+
 /// <reference path="image.d.ts" />
 /// <reference path="image/color.d.ts" />
 /// <reference path="image/color/palette.d.ts" />
@@ -88,6 +91,9 @@
 
 /// <reference path="net.d.ts" />
 /// <reference path="net/http.d.ts" />
+/// <reference path="net/mail.d.ts" />
+/// <reference path="net/smtp.d.ts" />
+/// <reference path="net/textproto.d.ts" />
 /// <reference path="net/url.d.ts" />
 
 /// <reference path="os.d.ts" />
@@ -102,6 +108,10 @@
 /// <reference path="strconv.d.ts" />
 /// <reference path="strings.d.ts" />
 /// <reference path="syscall.d.ts" />
+
+/// <reference path="text/template.d.ts" />
+/// <reference path="text/template/parse.d.ts" />
+
 /// <reference path="time.d.ts" />
 
 /// <reference path="unicode.d.ts" />
