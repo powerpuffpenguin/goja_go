@@ -58,7 +58,7 @@ declare module "stdgo/io/fs" {
     }
 
     function FileMode(v: Uint32 | NumberLike): FileMode
-    interface FileMode extends Native {
+    interface FileMode extends Number {
         readonly __FileMode: FileMode
 
         IsDir(): boolean

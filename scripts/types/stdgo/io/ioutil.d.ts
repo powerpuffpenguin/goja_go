@@ -25,5 +25,5 @@ declare module "stdgo/io/ioutil" {
     function ReadFile(filename: string): Bytes
     function TempDir(dir: sring, pattern: string): string
     function TempFile(dir: string, pattern: string): os.File
-    function WriteFile(filename: string, data: Bytes, perm: fs.FileMode)
+    function WriteFile(filename: string, data: Bytes, perm: fs.FileMode | NumberLike)
 }
