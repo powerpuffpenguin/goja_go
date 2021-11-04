@@ -346,8 +346,8 @@ declare module "stdgo/net/http" {
         Push(target: string, opts: PushOptionsPointer): void
     }
 
-    function NewRequest(method: string, url: string, body: io.Reader): RequestPointer
-    function NewRequestWithContext(ctx: context.Context, method: string, url: string, body: io.Reader): RequestPointer
+    function NewRequest(method: string, url: string, body?: io.Reader): RequestPointer
+    function NewRequestWithContext(ctx: context.Context, method: string, url: string, body?: io.Reader): RequestPointer
     function ReadRequest(b: bufio.ReaderPointer): RequestPointer
     interface RequestPointer extends Native {
         readonly __RequestPointer: RequestPointer
