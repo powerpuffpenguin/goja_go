@@ -13,8 +13,14 @@ github.com/powerpuffpenguin/goja v0.0.0-20211009015516-9627f63ec413 h1:h27aL76ZX
 github.com/powerpuffpenguin/goja v0.0.0-20211009015516-9627f63ec413/go.mod h1:Ot3zu3oIcn6giYkPtYRTeQL3Ns9kF4BcmAgRo3++pr8=
 github.com/powerpuffpenguin/goja v0.0.0-20211009050131-0c0da6bd5381 h1:jTGqAPGwXR6TfPHlHrcjA3h0vKUcCrgS/POkLW0H7Go=
 github.com/powerpuffpenguin/goja v0.0.0-20211009050131-0c0da6bd5381/go.mod h1:Ot3zu3oIcn6giYkPtYRTeQL3Ns9kF4BcmAgRo3++pr8=
+github.com/powerpuffpenguin/goja v0.0.0-20211019043336-b72169ea12ad h1:A1dPTWtLke44jKyxXHQMnVkcgUpQMlhsXIhaeazs2dI=
+github.com/powerpuffpenguin/goja v0.0.0-20211019043336-b72169ea12ad/go.mod h1:Ot3zu3oIcn6giYkPtYRTeQL3Ns9kF4BcmAgRo3++pr8=
+github.com/powerpuffpenguin/goja v0.0.0-20211224075023-1cd710c639f6 h1:fdQpwDneG3ozgy8+GZZYVxi4tNX/kg/A8q32oU0VQMY=
+github.com/powerpuffpenguin/goja v0.0.0-20211224075023-1cd710c639f6/go.mod h1:Ot3zu3oIcn6giYkPtYRTeQL3Ns9kF4BcmAgRo3++pr8=
 golang.org/x/text v0.3.6 h1:aRYxNxv6iGQlyVaZmk6ZgYEDa+Jg18DxebPSrd6bg1M=
 golang.org/x/text v0.3.6/go.mod h1:5Zoc/QRtKVWzQhOtBMvqHzDpF6irO9z98xDceosuGiQ=
+golang.org/x/text v0.3.7 h1:olpwvP2KacW1ZWvsR7uQhoyTYvKAupfQrRGBFM352Gk=
+golang.org/x/text v0.3.7/go.mod h1:u+2+/6zg+i71rQMx5EYifcz6MCKuco9NR6JIITiCfzQ=
 golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c h1:Hei/4ADfdWqJk1ZMxUNpqntNwaWcugrBjAiHlqqRiVk=
