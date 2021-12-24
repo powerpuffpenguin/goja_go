@@ -280,18 +280,14 @@ func (c *caller) Call(runtime *goja.Runtime, callSlice bool, callable reflect.Va
 			out = callable.Call(in)
 		}
 	} else {
-		var promise *goja.Promise
-		promise, err = goja.NewPromise(runtime)
-		if err != nil {
-			return
-		}
+		promise, resolve, reject := runtime.NewPromise()
 		loop := runtime.Loop()
 		err = loop.Async(nil)
 		if err != nil {
 			return
 		}
-		c.scheduler.Go(newAsyncImpl(c, runtime, promise, callSlice, callable, in))
-		out = append(out, reflect.ValueOf(promise.Value()))
+		c.scheduler.Go(newAsyncImpl(c, runtime, promise, resolve, reject, callSlice, callable, in))
+		out = append(out, reflect.ValueOf(promise))
 	}
 	return
 }
@@ -362,9 +358,10 @@ func (f *callerFactory) Put(caller goja.Caller) {
 }
 
 type asyncImpl struct {
-	caller  *caller
-	runtime *goja.Runtime
-	promise *goja.Promise
+	caller          *caller
+	runtime         *goja.Runtime
+	promise         *goja.Promise
+	resolve, reject func(interface{})
 
 	callSlice bool
 	value     reflect.Value
@@ -377,12 +374,15 @@ type asyncImpl struct {
 func newAsyncImpl(caller *caller,
 	runtime *goja.Runtime,
 	promise *goja.Promise,
+	resolve, reject func(interface{}),
 	callSlice bool, value reflect.Value, in []reflect.Value,
 ) *asyncImpl {
 	return &asyncImpl{
 		caller:    caller,
 		runtime:   runtime,
 		promise:   promise,
+		resolve:   resolve,
+		reject:    reject,
 		callSlice: callSlice,
 		value:     value,
 		in:        in,
@@ -413,7 +413,7 @@ func (a *asyncImpl) serve() {
 func (a *asyncImpl) OnResult(closed bool) (completed bool) {
 	completed = true
 	if a.err != nil {
-		a.promise.Reject(a.err)
+		a.reject(a.err)
 		return
 	}
 	var (
@@ -432,10 +432,10 @@ func (a *asyncImpl) OnResult(closed bool) (completed bool) {
 					err := last.Interface()
 					if e, ok := err.(*goja.Exception); ok {
 						var v goja.Value = e.Value()
-						a.promise.Reject(v)
+						a.reject(v)
 						return
 					}
-					a.promise.Reject(runtime.NewGoError(err.(error)))
+					a.reject(runtime.NewGoError(err.(error)))
 					return
 				}
 				out = out[:len(out)-1]
@@ -444,9 +444,9 @@ func (a *asyncImpl) OnResult(closed bool) (completed bool) {
 		result, e = caller.after(runtime, out)
 	}
 	if e == nil {
-		a.promise.Resolve(result)
+		a.resolve(result)
 	} else {
-		a.promise.Reject(runtime.NewGoError(e))
+		a.reject(runtime.NewGoError(e))
 	}
 	return
 }
